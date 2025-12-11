@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SALVAMOVIL</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navegación -->
+    <nav>
+        <div class="logo">SALVAMOVIL</div>
+        <div class="menu">
+            <a href="#inicio">Inicio</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#contacto">Contacto</a>
+        </div>
+    </nav>
+
+    <!-- Inicio -->
+    <section id="inicio">
+        <h1>Venta y reparación de celulares</h1>
+        <p>Compra los últimos modelos y repara tu celular con garantía</p>
+    </section>
+
+    <!-- Servicios -->
+    <section id="servicios">
+        <h2>Nuestros Servicios</h2>
+        <div class="servicios-grid">
+            <div class="servicio">
+                <h3>Venta de Celulares</h3>
+                <p>Últimos modelos disponibles</p>
+            </div>
+            <div class="servicio">
+                <h3>Reparación</h3>
+                <p>Arreglamos todo tipo de fallas</p>
+            </div>
+            <div class="servicio">
+                <h3>Garantía</h3>
+                <p>Todos los productos con garantía</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto">
+        <h2>Contacto</h2>
+        <div class="contacto-contenedor">
+            <div class="info">
+                <p><strong>Dirección:</strong> Calle 77 108-57 bogotya</p>
+                <p><strong>Teléfono:</strong> +57 3122232233</p>
+                <p><strong>Email:</strong> info@salvamovil.com</p>
+                <p><strong>Horario:</strong> Lunes - Viernes 9:00 AM - 7:00 PM</p>
+            </div>
+            <form id="contactForm">
+                <input type="text" placeholder="Nombre" required>
+                <input type="email" placeholder="Email" required>
+                <input type="tel" placeholder="Teléfono" required>
+                <textarea placeholder="Mensaje" rows="4" required></textarea>
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+        <div id="mensaje" class="mensaje-exito"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 SALVAMOVIL - Todos los derechos reservados</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,951 @@
+[
+  {
+    "id": "prod_1765053280860_v1cn58nod",
+    "name": "camisa jeans",
+    "subtitle": "",
+    "price": 200000,
+    "description": "camiseta jean polo",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765053279/mascotitas/products/mascotitas/products/Camisas/camisa_jeans/Negra_1_1765053277573.jpg",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765053279/mascotitas/products/mascotitas/products/Camisas/camisa_jeans/Negra_1_1765053277573.jpg",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765053280/mascotitas/products/mascotitas/products/Camisas/camisa_jeans/Cafe_2_1765053279023.jpg"
+    ],
+    "category": "Camisas",
+    "stock": 190,
+    "sizes": [],
+    "colors": [
+      "Negra",
+      "Cafe"
+    ],
+    "colorImages": {
+      "Negra": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765053279/mascotitas/products/mascotitas/products/Camisas/camisa_jeans/Negra_1_1765053277573.jpg",
+      "Cafe": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765053280/mascotitas/products/mascotitas/products/Camisas/camisa_jeans/Cafe_2_1765053279023.jpg"
+    },
+    "status": "published",
+    "createdAt": "2025-12-06T20:34:40.860Z",
+    "updatedAt": "2025-12-07T06:16:41.797Z",
+    "discount": 63
+  },
+  {
+    "id": "prod_1765053285607_stazkp3a4",
+    "name": "morral dama fashion",
+    "subtitle": "",
+    "price": 130000,
+    "description": "lo mejor de lo mejor",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765053282/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Verde_1_1765053280860.jpg",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765053282/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Verde_1_1765053280860.jpg",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765053283/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Negro_2_1765053282058.jpg",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765053285/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Rojo_3_1765053283763.jpg"
+    ],
+    "category": "Morrales",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Verde",
+      "Negro",
+      "Rojo"
+    ],
+    "colorImages": {
+      "Verde": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765053282/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Verde_1_1765053280860.jpg",
+      "Negro": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765053283/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Negro_2_1765053282058.jpg",
+      "Rojo": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765053285/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Rojo_3_1765053283763.jpg"
+    },
+    "status": "published",
+    "createdAt": "2025-12-06T20:34:45.607Z",
+    "updatedAt": "2025-12-06T23:54:46.391Z",
+    "discount": 90
+  },
+  {
+    "id": "prod_1765053287577_xt1trtka3",
+    "name": "morral fashion hombre",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765053286/mascotitas/products/mascotitas/products/Morrales/morral_fashion_hombre/Negro_1_1765053285607.jpg",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765053286/mascotitas/products/mascotitas/products/Morrales/morral_fashion_hombre/Negro_1_1765053285607.jpg",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765053287/mascotitas/products/mascotitas/products/Morrales/morral_fashion_hombre/Gris_2_1765053286651.jpg"
+    ],
+    "category": "Morrales",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Negro",
+      "Gris"
+    ],
+    "colorImages": {
+      "Negro": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765053286/mascotitas/products/mascotitas/products/Morrales/morral_fashion_hombre/Negro_1_1765053285607.jpg",
+      "Gris": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765053287/mascotitas/products/mascotitas/products/Morrales/morral_fashion_hombre/Gris_2_1765053286651.jpg"
+    },
+    "status": "published",
+    "createdAt": "2025-12-06T20:34:47.577Z",
+    "updatedAt": "2025-12-06T22:51:16.283Z"
+  },
+  {
+    "id": "prod_1765053289320_zficjksre",
+    "name": "conjunto de dama jordan",
+    "subtitle": "",
+    "price": 500000,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765053289/mascotitas/products/mascotitas/products/Conjuntos/conjunto_de_dama_jordan/Negro_1_1765053288550.jpg",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765053289/mascotitas/products/mascotitas/products/Conjuntos/conjunto_de_dama_jordan/Negro_1_1765053288550.jpg"
+    ],
+    "category": "Conjuntos",
+    "stock": 1,
+    "sizes": [
+      "s",
+      "l",
+      "m"
+    ],
+    "colors": [
+      "Negro"
+    ],
+    "colorImages": {
+      "Negro": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765053289/mascotitas/products/mascotitas/products/Conjuntos/conjunto_de_dama_jordan/Negro_1_1765053288550.jpg"
+    },
+    "status": "published",
+    "createdAt": "2025-12-06T20:34:49.320Z",
+    "updatedAt": "2025-12-07T06:15:34.472Z",
+    "discount": 40
+  },
+  {
+    "id": "prod_1765087452773_aig931bjn",
+    "name": "buso jordan",
+    "subtitle": "",
+    "price": 360000,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087448/mascotitas/products/mascotitas/products/productos/buso_jordan/Amarillo_1_1765087445222.png",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087448/mascotitas/products/mascotitas/products/productos/buso_jordan/Amarillo_1_1765087445222.png",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087450/mascotitas/products/mascotitas/products/productos/buso_jordan/Negro_2_1765087449197.png",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087452/mascotitas/products/mascotitas/products/productos/buso_jordan/Rosado_3_1765087450545.png"
+    ],
+    "category": "Conjuntos",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Amarillo",
+      "Negro",
+      "Rosado"
+    ],
+    "colorImages": {
+      "Amarillo": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087448/mascotitas/products/mascotitas/products/productos/buso_jordan/Amarillo_1_1765087445222.png",
+      "Negro": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087450/mascotitas/products/mascotitas/products/productos/buso_jordan/Negro_2_1765087449197.png",
+      "Rosado": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087452/mascotitas/products/mascotitas/products/productos/buso_jordan/Rosado_3_1765087450545.png"
+    },
+    "status": "published",
+    "createdAt": "2025-12-07T06:04:12.774Z",
+    "updatedAt": "2025-12-07T06:15:50.028Z",
+    "discount": 90
+  },
+  {
+    "id": "prod_1765087457934_w19kr641n",
+    "name": "buso",
+    "subtitle": "",
+    "price": 85000,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087454/mascotitas/products/mascotitas/products/productos/buso/Azul_1_1765087452774.png",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087454/mascotitas/products/mascotitas/products/productos/buso/Azul_1_1765087452774.png",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087456/mascotitas/products/mascotitas/products/productos/buso/Cafe_2_1765087454683.png",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087457/mascotitas/products/mascotitas/products/productos/buso/Negro_3_1765087456541.png"
+    ],
+    "category": "Conjuntos",
+    "stock": 145,
+    "sizes": [
+      "s",
+      "m",
+      "l"
+    ],
+    "colors": [
+      "Azul",
+      "Cafe",
+      "Negro"
+    ],
+    "colorImages": {
+      "Azul": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087454/mascotitas/products/mascotitas/products/productos/buso/Azul_1_1765087452774.png",
+      "Cafe": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087456/mascotitas/products/mascotitas/products/productos/buso/Cafe_2_1765087454683.png",
+      "Negro": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087457/mascotitas/products/mascotitas/products/productos/buso/Negro_3_1765087456541.png"
+    },
+    "status": "published",
+    "createdAt": "2025-12-07T06:04:17.934Z",
+    "updatedAt": "2025-12-07T20:37:10.344Z",
+    "discount": 40
+  },
+  {
+    "id": "prod_1765087459286_1kki7s1by",
+    "name": "buso blanco y",
+    "subtitle": "",
+    "price": 456000,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087459/mascotitas/products/mascotitas/products/productos/buso_blanco_y/Negro_1_1765087457934.png",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087459/mascotitas/products/mascotitas/products/productos/buso_blanco_y/Negro_1_1765087457934.png"
+    ],
+    "category": "Conjuntos",
+    "stock": 20,
+    "sizes": [],
+    "colors": [
+      "Negro"
+    ],
+    "colorImages": {
+      "Negro": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087459/mascotitas/products/mascotitas/products/productos/buso_blanco_y/Negro_1_1765087457934.png"
+    },
+    "status": "published",
+    "createdAt": "2025-12-07T06:04:19.287Z",
+    "updatedAt": "2025-12-07T06:15:20.903Z",
+    "discount": 30
+  },
+  {
+    "id": "prod_1765087462464_zcc07yxj9",
+    "name": "camisa jeans",
+    "subtitle": "",
+    "price": 320000,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087460/mascotitas/products/mascotitas/products/productos/camisa_jeans/Cafe_1_1765087459287.png",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087460/mascotitas/products/mascotitas/products/productos/camisa_jeans/Cafe_1_1765087459287.png",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087462/mascotitas/products/mascotitas/products/productos/camisa_jeans/Negra_2_1765087461046.png"
+    ],
+    "category": "Camisas",
+    "stock": 40,
+    "sizes": [
+      "s",
+      "m",
+      "l",
+      "xl"
+    ],
+    "colors": [
+      "Cafe",
+      "Negra"
+    ],
+    "colorImages": {
+      "Cafe": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087460/mascotitas/products/mascotitas/products/productos/camisa_jeans/Cafe_1_1765087459287.png",
+      "Negra": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087462/mascotitas/products/mascotitas/products/productos/camisa_jeans/Negra_2_1765087461046.png"
+    },
+    "status": "published",
+    "createdAt": "2025-12-07T06:04:22.464Z",
+    "updatedAt": "2025-12-07T06:13:00.193Z"
+  },
+  {
+    "id": "prod_1765087464037_r7utblp75",
+    "name": "cartera de dama (2)",
+    "subtitle": "",
+    "price": 360000,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087463/mascotitas/products/mascotitas/products/productos/cartera_de_dama__2_/Unico_1_1765087462464.png",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087463/mascotitas/products/mascotitas/products/productos/cartera_de_dama__2_/Unico_1_1765087462464.png"
+    ],
+    "category": "Productos",
+    "stock": 1,
+    "sizes": [],
+    "colors": [],
+    "colorImages": {},
+    "status": "published",
+    "createdAt": "2025-12-07T06:04:24.037Z",
+    "updatedAt": "2025-12-07T06:13:00.193Z"
+  },
+  {
+    "id": "prod_1765087465524_2tzox4z0y",
+    "name": "cartera de dama",
+    "subtitle": "",
+    "price": 360000,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087465/mascotitas/products/mascotitas/products/productos/cartera_de_dama/Unico_1_1765087464038.png",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087465/mascotitas/products/mascotitas/products/productos/cartera_de_dama/Unico_1_1765087464038.png"
+    ],
+    "category": "Productos",
+    "stock": 1,
+    "sizes": [],
+    "colors": [],
+    "colorImages": {},
+    "status": "published",
+    "createdAt": "2025-12-07T06:04:25.524Z",
+    "updatedAt": "2025-12-07T06:15:04.285Z",
+    "discount": 20
+  },
+  {
+    "id": "prod_1765087467062_iaw3dzwz7",
+    "name": "kay ali",
+    "subtitle": "",
+    "price": 360000,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087466/mascotitas/products/mascotitas/products/productos/kay_ali/Unico_1_1765087465524.png",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087466/mascotitas/products/mascotitas/products/productos/kay_ali/Unico_1_1765087465524.png"
+    ],
+    "category": "productos",
+    "stock": 1,
+    "sizes": [],
+    "colors": [],
+    "colorImages": {},
+    "status": "published",
+    "createdAt": "2025-12-07T06:04:27.062Z",
+    "updatedAt": "2025-12-07T06:13:00.193Z"
+  },
+  {
+    "id": "prod_1765087468856_n7n84ji3c",
+    "name": "perfume arabe",
+    "subtitle": "",
+    "price": 360000,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087468/mascotitas/products/mascotitas/products/productos/perfume_arabe/Unico_1_1765087467062.png",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087468/mascotitas/products/mascotitas/products/productos/perfume_arabe/Unico_1_1765087467062.png"
+    ],
+    "category": "Productos",
+    "stock": 1,
+    "sizes": [],
+    "colors": [],
+    "colorImages": {},
+    "status": "published",
+    "createdAt": "2025-12-07T06:04:28.856Z",
+    "updatedAt": "2025-12-07T06:14:49.893Z",
+    "discount": 30
+  },
+  {
+    "id": "prod_1765087470324_5wmh0dizd",
+    "name": "perfume one million",
+    "subtitle": "",
+    "price": 360000,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087469/mascotitas/products/mascotitas/products/productos/perfume_one_million/Unico_1_1765087468856.png",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087469/mascotitas/products/mascotitas/products/productos/perfume_one_million/Unico_1_1765087468856.png"
+    ],
+    "category": "Productos",
+    "stock": 1,
+    "sizes": [],
+    "colors": [],
+    "colorImages": {},
+    "status": "published",
+    "createdAt": "2025-12-07T06:04:30.324Z",
+    "updatedAt": "2025-12-07T06:13:00.193Z"
+  },
+  {
+    "id": "prod_1765087476995_a8h4rjcew",
+    "name": "morral fashion dama",
+    "subtitle": "",
+    "price": 360000,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087471/mascotitas/products/mascotitas/products/productos/morral_fashion_dama/Negro_1_1765087470324.png",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087471/mascotitas/products/mascotitas/products/productos/morral_fashion_dama/Negro_1_1765087470324.png",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087473/mascotitas/products/mascotitas/products/productos/morral_fashion_dama/Rojo_2_1765087472521.png",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087475/mascotitas/products/mascotitas/products/productos/morral_fashion_dama/Verde_3_1765087474680.png"
+    ],
+    "category": "Morrales",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Negro",
+      "Rojo",
+      "Verde"
+    ],
+    "colorImages": {
+      "Negro": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087471/mascotitas/products/mascotitas/products/productos/morral_fashion_dama/Negro_1_1765087470324.png",
+      "Rojo": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087473/mascotitas/products/mascotitas/products/productos/morral_fashion_dama/Rojo_2_1765087472521.png",
+      "Verde": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087475/mascotitas/products/mascotitas/products/productos/morral_fashion_dama/Verde_3_1765087474680.png"
+    },
+    "status": "published",
+    "createdAt": "2025-12-07T06:04:36.995Z",
+    "updatedAt": "2025-12-07T06:14:18.030Z",
+    "discount": 30
+  },
+  {
+    "id": "prod_1765087480508_tlqmk8pb7",
+    "name": "morral gufansen",
+    "subtitle": "",
+    "price": 360000,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087478/mascotitas/products/mascotitas/products/productos/morral_gufansen/Gris_1_1765087476995.png",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087478/mascotitas/products/mascotitas/products/productos/morral_gufansen/Gris_1_1765087476995.png",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087480/mascotitas/products/mascotitas/products/productos/morral_gufansen/Negro_2_1765087478720.png"
+    ],
+    "category": "Morrales",
+    "stock": 166,
+    "sizes": [],
+    "colors": [
+      "Gris",
+      "Negro"
+    ],
+    "colorImages": {
+      "Gris": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087478/mascotitas/products/mascotitas/products/productos/morral_gufansen/Gris_1_1765087476995.png",
+      "Negro": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087480/mascotitas/products/mascotitas/products/productos/morral_gufansen/Negro_2_1765087478720.png"
+    },
+    "status": "published",
+    "createdAt": "2025-12-07T06:04:40.508Z",
+    "updatedAt": "2025-12-07T06:13:53.843Z",
+    "discount": 20
+  },
+  {
+    "id": "prod_1765087485997_azxbaukuj",
+    "name": "tenis jordan blanco",
+    "subtitle": "",
+    "price": 360000,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087482/mascotitas/products/mascotitas/products/productos/tenis_jordan_blanco/Azul_1_1765087480508.png",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087482/mascotitas/products/mascotitas/products/productos/tenis_jordan_blanco/Azul_1_1765087480508.png",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087485/mascotitas/products/mascotitas/products/productos/tenis_jordan_blanco/Rojo_2_1765087483475.png"
+    ],
+    "category": "Productos",
+    "stock": 155,
+    "sizes": [
+      "36-43"
+    ],
+    "colors": [
+      "Azul",
+      "Rojo"
+    ],
+    "colorImages": {
+      "Azul": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087482/mascotitas/products/mascotitas/products/productos/tenis_jordan_blanco/Azul_1_1765087480508.png",
+      "Rojo": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087485/mascotitas/products/mascotitas/products/productos/tenis_jordan_blanco/Rojo_2_1765087483475.png"
+    },
+    "status": "published",
+    "createdAt": "2025-12-07T06:04:45.997Z",
+    "updatedAt": "2025-12-07T06:13:39.879Z",
+    "discount": 50
+  },
+  {
+    "id": "prod_1765087489261_ivie2x1ng",
+    "name": "zapatos fashion",
+    "subtitle": "",
+    "price": 360000,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087487/mascotitas/products/mascotitas/products/productos/zapatos_fashion/Blancos_1_1765087485997.png",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087487/mascotitas/products/mascotitas/products/productos/zapatos_fashion/Blancos_1_1765087485997.png",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087488/mascotitas/products/mascotitas/products/productos/zapatos_fashion/Negros_2_1765087487389.png"
+    ],
+    "category": "Productos",
+    "stock": 15,
+    "sizes": [
+      "36-43"
+    ],
+    "colors": [
+      "Blancos",
+      "Negros"
+    ],
+    "colorImages": {
+      "Blancos": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087487/mascotitas/products/mascotitas/products/productos/zapatos_fashion/Blancos_1_1765087485997.png",
+      "Negros": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765087488/mascotitas/products/mascotitas/products/productos/zapatos_fashion/Negros_2_1765087487389.png"
+    },
+    "status": "published",
+    "createdAt": "2025-12-07T06:04:49.261Z",
+    "updatedAt": "2025-12-07T06:13:00.193Z"
+  },
+  {
+    "id": "prod_1765103639306_y54xtlzmt",
+    "name": "camisa jeans",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765103634/mascotitas/products/mascotitas/products/Camisas/camisa_jeans/Negra_1_1765103632932.jpg",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765103634/mascotitas/products/mascotitas/products/Camisas/camisa_jeans/Negra_1_1765103632932.jpg",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765103636/mascotitas/products/mascotitas/products/Camisas/camisa_jeans/Cafe_2_1765103634797.jpg"
+    ],
+    "category": "Camisas",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Negra",
+      "Cafe"
+    ],
+    "colorImages": {
+      "Negra": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765103634/mascotitas/products/mascotitas/products/Camisas/camisa_jeans/Negra_1_1765103632932.jpg",
+      "Cafe": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765103636/mascotitas/products/mascotitas/products/Camisas/camisa_jeans/Cafe_2_1765103634797.jpg"
+    },
+    "status": "draft",
+    "createdAt": "2025-12-07T10:33:59.306Z",
+    "updatedAt": "2025-12-07T10:33:59.306Z"
+  },
+  {
+    "id": "prod_1765103643219_uogatnm5v",
+    "name": "morral dama fashion",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765103640/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Verde_1_1765103639307.jpg",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765103640/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Verde_1_1765103639307.jpg",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765103641/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Negro_2_1765103640523.jpg",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765103643/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Rojo_3_1765103641664.jpg"
+    ],
+    "category": "Morrales",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Verde",
+      "Negro",
+      "Rojo"
+    ],
+    "colorImages": {
+      "Verde": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765103640/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Verde_1_1765103639307.jpg",
+      "Negro": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765103641/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Negro_2_1765103640523.jpg",
+      "Rojo": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765103643/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Rojo_3_1765103641664.jpg"
+    },
+    "status": "draft",
+    "createdAt": "2025-12-07T10:34:03.219Z",
+    "updatedAt": "2025-12-07T10:34:03.219Z"
+  },
+  {
+    "id": "prod_1765103645330_tffkzxlia",
+    "name": "morral fashion hombre",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765103644/mascotitas/products/mascotitas/products/Morrales/morral_fashion_hombre/Negro_1_1765103643219.jpg",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765103644/mascotitas/products/mascotitas/products/Morrales/morral_fashion_hombre/Negro_1_1765103643219.jpg",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765103645/mascotitas/products/mascotitas/products/Morrales/morral_fashion_hombre/Gris_2_1765103644180.jpg"
+    ],
+    "category": "Morrales",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Negro",
+      "Gris"
+    ],
+    "colorImages": {
+      "Negro": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765103644/mascotitas/products/mascotitas/products/Morrales/morral_fashion_hombre/Negro_1_1765103643219.jpg",
+      "Gris": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765103645/mascotitas/products/mascotitas/products/Morrales/morral_fashion_hombre/Gris_2_1765103644180.jpg"
+    },
+    "status": "draft",
+    "createdAt": "2025-12-07T10:34:05.330Z",
+    "updatedAt": "2025-12-07T10:34:05.331Z"
+  },
+  {
+    "id": "prod_1765103646453_760fdz7yo",
+    "name": "conjunto de dama jordan gris con",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765103646/mascotitas/products/mascotitas/products/Conjuntos/conjunto_de_dama_jordan_gris_con/Amarillo_1_1765103645331.jpg",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765103646/mascotitas/products/mascotitas/products/Conjuntos/conjunto_de_dama_jordan_gris_con/Amarillo_1_1765103645331.jpg"
+    ],
+    "category": "Conjuntos",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Amarillo"
+    ],
+    "colorImages": {
+      "Amarillo": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765103646/mascotitas/products/mascotitas/products/Conjuntos/conjunto_de_dama_jordan_gris_con/Amarillo_1_1765103645331.jpg"
+    },
+    "status": "draft",
+    "createdAt": "2025-12-07T10:34:06.453Z",
+    "updatedAt": "2025-12-07T10:34:06.453Z"
+  },
+  {
+    "id": "prod_1765103647457_iuwd1mphr",
+    "name": "conjunto de dama jordan",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765103647/mascotitas/products/mascotitas/products/Conjuntos/conjunto_de_dama_jordan/Negro_1_1765103646453.jpg",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765103647/mascotitas/products/mascotitas/products/Conjuntos/conjunto_de_dama_jordan/Negro_1_1765103646453.jpg"
+    ],
+    "category": "Conjuntos",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Negro"
+    ],
+    "colorImages": {
+      "Negro": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765103647/mascotitas/products/mascotitas/products/Conjuntos/conjunto_de_dama_jordan/Negro_1_1765103646453.jpg"
+    },
+    "status": "draft",
+    "createdAt": "2025-12-07T10:34:07.457Z",
+    "updatedAt": "2025-12-07T10:34:07.457Z"
+  },
+  {
+    "id": "prod_1765104513241_pxfe6ijo5",
+    "name": "camisa jeans",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104510/mascotitas/products/mascotitas/products/Camisas/camisa_jeans/Negra_1_1765104508040.jpg",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104510/mascotitas/products/mascotitas/products/Camisas/camisa_jeans/Negra_1_1765104508040.jpg",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104513/mascotitas/products/mascotitas/products/Camisas/camisa_jeans/Cafe_2_1765104510563.jpg"
+    ],
+    "category": "Camisas",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Negra",
+      "Cafe"
+    ],
+    "colorImages": {
+      "Negra": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104510/mascotitas/products/mascotitas/products/Camisas/camisa_jeans/Negra_1_1765104508040.jpg",
+      "Cafe": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104513/mascotitas/products/mascotitas/products/Camisas/camisa_jeans/Cafe_2_1765104510563.jpg"
+    },
+    "status": "draft",
+    "createdAt": "2025-12-07T10:48:33.241Z",
+    "updatedAt": "2025-12-07T10:48:33.241Z"
+  },
+  {
+    "id": "prod_1765104517770_1bkfc78uh",
+    "name": "morral dama fashion",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104515/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Verde_1_1765104513241.jpg",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104515/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Verde_1_1765104513241.jpg",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104516/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Negro_2_1765104515115.jpg",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104517/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Rojo_3_1765104516424.jpg"
+    ],
+    "category": "Morrales",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Verde",
+      "Negro",
+      "Rojo"
+    ],
+    "colorImages": {
+      "Verde": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104515/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Verde_1_1765104513241.jpg",
+      "Negro": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104516/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Negro_2_1765104515115.jpg",
+      "Rojo": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104517/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Rojo_3_1765104516424.jpg"
+    },
+    "status": "draft",
+    "createdAt": "2025-12-07T10:48:37.770Z",
+    "updatedAt": "2025-12-07T10:48:37.770Z"
+  },
+  {
+    "id": "prod_1765104520230_51bl5ou99",
+    "name": "morral fashion hombre",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104519/mascotitas/products/mascotitas/products/Morrales/morral_fashion_hombre/Negro_1_1765104517770.jpg",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104519/mascotitas/products/mascotitas/products/Morrales/morral_fashion_hombre/Negro_1_1765104517770.jpg",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104520/mascotitas/products/mascotitas/products/Morrales/morral_fashion_hombre/Gris_2_1765104518947.jpg"
+    ],
+    "category": "Morrales",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Negro",
+      "Gris"
+    ],
+    "colorImages": {
+      "Negro": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104519/mascotitas/products/mascotitas/products/Morrales/morral_fashion_hombre/Negro_1_1765104517770.jpg",
+      "Gris": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104520/mascotitas/products/mascotitas/products/Morrales/morral_fashion_hombre/Gris_2_1765104518947.jpg"
+    },
+    "status": "draft",
+    "createdAt": "2025-12-07T10:48:40.230Z",
+    "updatedAt": "2025-12-07T10:48:40.230Z"
+  },
+  {
+    "id": "prod_1765104521637_u05vpe62e",
+    "name": "conjunto de dama jordan gris con",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104521/mascotitas/products/mascotitas/products/Conjuntos/conjunto_de_dama_jordan_gris_con/Amarillo_1_1765104520230.jpg",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104521/mascotitas/products/mascotitas/products/Conjuntos/conjunto_de_dama_jordan_gris_con/Amarillo_1_1765104520230.jpg"
+    ],
+    "category": "Conjuntos",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Amarillo"
+    ],
+    "colorImages": {
+      "Amarillo": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104521/mascotitas/products/mascotitas/products/Conjuntos/conjunto_de_dama_jordan_gris_con/Amarillo_1_1765104520230.jpg"
+    },
+    "status": "draft",
+    "createdAt": "2025-12-07T10:48:41.637Z",
+    "updatedAt": "2025-12-07T10:48:41.637Z"
+  },
+  {
+    "id": "prod_1765104522694_osyobpc2o",
+    "name": "conjunto de dama jordan",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104522/mascotitas/products/mascotitas/products/Conjuntos/conjunto_de_dama_jordan/Negro_1_1765104521637.jpg",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104522/mascotitas/products/mascotitas/products/Conjuntos/conjunto_de_dama_jordan/Negro_1_1765104521637.jpg"
+    ],
+    "category": "Conjuntos",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Negro"
+    ],
+    "colorImages": {
+      "Negro": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104522/mascotitas/products/mascotitas/products/Conjuntos/conjunto_de_dama_jordan/Negro_1_1765104521637.jpg"
+    },
+    "status": "draft",
+    "createdAt": "2025-12-07T10:48:42.694Z",
+    "updatedAt": "2025-12-07T10:48:42.694Z"
+  },
+  {
+    "id": "prod_1765104542614_9ietmdosa",
+    "name": "camisa jeans",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104540/mascotitas/products/mascotitas/products/Camisas/camisa_jeans/Negra_1_1765104536826.jpg",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104540/mascotitas/products/mascotitas/products/Camisas/camisa_jeans/Negra_1_1765104536826.jpg",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104542/mascotitas/products/mascotitas/products/Camisas/camisa_jeans/Cafe_2_1765104540766.jpg"
+    ],
+    "category": "Camisas",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Negra",
+      "Cafe"
+    ],
+    "colorImages": {
+      "Negra": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104540/mascotitas/products/mascotitas/products/Camisas/camisa_jeans/Negra_1_1765104536826.jpg",
+      "Cafe": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104542/mascotitas/products/mascotitas/products/Camisas/camisa_jeans/Cafe_2_1765104540766.jpg"
+    },
+    "status": "draft",
+    "createdAt": "2025-12-07T10:49:02.614Z",
+    "updatedAt": "2025-12-07T10:49:02.614Z"
+  },
+  {
+    "id": "prod_1765104547676_78edahcl7",
+    "name": "morral dama fashion",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104544/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Verde_1_1765104542614.jpg",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104544/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Verde_1_1765104542614.jpg",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104545/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Negro_2_1765104544373.jpg",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104547/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Rojo_3_1765104545736.jpg"
+    ],
+    "category": "Morrales",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Verde",
+      "Negro",
+      "Rojo"
+    ],
+    "colorImages": {
+      "Verde": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104544/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Verde_1_1765104542614.jpg",
+      "Negro": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104545/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Negro_2_1765104544373.jpg",
+      "Rojo": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104547/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Rojo_3_1765104545736.jpg"
+    },
+    "status": "draft",
+    "createdAt": "2025-12-07T10:49:07.676Z",
+    "updatedAt": "2025-12-07T10:49:07.676Z"
+  },
+  {
+    "id": "prod_1765104550136_znlcz3um4",
+    "name": "morral fashion hombre",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104549/mascotitas/products/mascotitas/products/Morrales/morral_fashion_hombre/Negro_1_1765104547676.jpg",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104549/mascotitas/products/mascotitas/products/Morrales/morral_fashion_hombre/Negro_1_1765104547676.jpg",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104550/mascotitas/products/mascotitas/products/Morrales/morral_fashion_hombre/Gris_2_1765104548922.jpg"
+    ],
+    "category": "Morrales",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Negro",
+      "Gris"
+    ],
+    "colorImages": {
+      "Negro": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104549/mascotitas/products/mascotitas/products/Morrales/morral_fashion_hombre/Negro_1_1765104547676.jpg",
+      "Gris": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104550/mascotitas/products/mascotitas/products/Morrales/morral_fashion_hombre/Gris_2_1765104548922.jpg"
+    },
+    "status": "draft",
+    "createdAt": "2025-12-07T10:49:10.136Z",
+    "updatedAt": "2025-12-07T10:49:10.136Z"
+  },
+  {
+    "id": "prod_1765104552521_ucwdxwt9q",
+    "name": "conjunto de dama jordan gris con",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104552/mascotitas/products/mascotitas/products/Conjuntos/conjunto_de_dama_jordan_gris_con/Amarillo_1_1765104550136.jpg",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104552/mascotitas/products/mascotitas/products/Conjuntos/conjunto_de_dama_jordan_gris_con/Amarillo_1_1765104550136.jpg"
+    ],
+    "category": "Conjuntos",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Amarillo"
+    ],
+    "colorImages": {
+      "Amarillo": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104552/mascotitas/products/mascotitas/products/Conjuntos/conjunto_de_dama_jordan_gris_con/Amarillo_1_1765104550136.jpg"
+    },
+    "status": "draft",
+    "createdAt": "2025-12-07T10:49:12.521Z",
+    "updatedAt": "2025-12-07T10:49:12.521Z"
+  },
+  {
+    "id": "prod_1765104553354_09knmm9fr",
+    "name": "conjunto de dama jordan",
+    "subtitle": "",
+    "price": 80000,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104553/mascotitas/products/mascotitas/products/Conjuntos/conjunto_de_dama_jordan/Negro_1_1765104552521.jpg",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104553/mascotitas/products/mascotitas/products/Conjuntos/conjunto_de_dama_jordan/Negro_1_1765104552521.jpg"
+    ],
+    "category": "Conjuntos",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Negro"
+    ],
+    "colorImages": {
+      "Negro": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765104553/mascotitas/products/mascotitas/products/Conjuntos/conjunto_de_dama_jordan/Negro_1_1765104552521.jpg"
+    },
+    "status": "published",
+    "createdAt": "2025-12-07T10:49:13.354Z",
+    "updatedAt": "2025-12-07T20:36:32.928Z"
+  },
+  {
+    "id": "prod_1765140037424_ttnotblw1",
+    "name": "camisa jeans",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765140036/mascotitas/products/mascotitas/products/Camisas/camisa_jeans/Negra_1_1765140034587.jpg",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765140036/mascotitas/products/mascotitas/products/Camisas/camisa_jeans/Negra_1_1765140034587.jpg",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765140037/mascotitas/products/mascotitas/products/Camisas/camisa_jeans/Cafe_2_1765140036399.jpg"
+    ],
+    "category": "Camisas",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Negra",
+      "Cafe"
+    ],
+    "colorImages": {
+      "Negra": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765140036/mascotitas/products/mascotitas/products/Camisas/camisa_jeans/Negra_1_1765140034587.jpg",
+      "Cafe": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765140037/mascotitas/products/mascotitas/products/Camisas/camisa_jeans/Cafe_2_1765140036399.jpg"
+    },
+    "status": "draft",
+    "createdAt": "2025-12-07T20:40:37.424Z",
+    "updatedAt": "2025-12-07T20:40:37.424Z"
+  },
+  {
+    "id": "prod_1765140040385_3o9nt2e45",
+    "name": "morral dama fashion",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765140038/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Verde_1_1765140037424.jpg",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765140038/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Verde_1_1765140037424.jpg",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765140039/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Negro_2_1765140038547.jpg",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765140040/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Rojo_3_1765140039563.jpg"
+    ],
+    "category": "Morrales",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Verde",
+      "Negro",
+      "Rojo"
+    ],
+    "colorImages": {
+      "Verde": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765140038/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Verde_1_1765140037424.jpg",
+      "Negro": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765140039/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Negro_2_1765140038547.jpg",
+      "Rojo": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765140040/mascotitas/products/mascotitas/products/Morrales/morral_dama_fashion/Rojo_3_1765140039563.jpg"
+    },
+    "status": "draft",
+    "createdAt": "2025-12-07T20:40:40.385Z",
+    "updatedAt": "2025-12-07T20:40:40.385Z"
+  },
+  {
+    "id": "prod_1765140042020_pegbdlwjx",
+    "name": "morral fashion hombre",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765140041/mascotitas/products/mascotitas/products/Morrales/morral_fashion_hombre/Negro_1_1765140040385.jpg",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765140041/mascotitas/products/mascotitas/products/Morrales/morral_fashion_hombre/Negro_1_1765140040385.jpg",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765140042/mascotitas/products/mascotitas/products/Morrales/morral_fashion_hombre/Gris_2_1765140041261.jpg"
+    ],
+    "category": "Morrales",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Negro",
+      "Gris"
+    ],
+    "colorImages": {
+      "Negro": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765140041/mascotitas/products/mascotitas/products/Morrales/morral_fashion_hombre/Negro_1_1765140040385.jpg",
+      "Gris": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765140042/mascotitas/products/mascotitas/products/Morrales/morral_fashion_hombre/Gris_2_1765140041261.jpg"
+    },
+    "status": "draft",
+    "createdAt": "2025-12-07T20:40:42.020Z",
+    "updatedAt": "2025-12-07T20:40:42.020Z"
+  },
+  {
+    "id": "prod_1765140043295_q8dvumxsv",
+    "name": "conjunto de dama jordan gris con",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765140043/mascotitas/products/mascotitas/products/Conjuntos/conjunto_de_dama_jordan_gris_con/Amarillo_1_1765140042020.jpg",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765140043/mascotitas/products/mascotitas/products/Conjuntos/conjunto_de_dama_jordan_gris_con/Amarillo_1_1765140042020.jpg"
+    ],
+    "category": "Conjuntos",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Amarillo"
+    ],
+    "colorImages": {
+      "Amarillo": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765140043/mascotitas/products/mascotitas/products/Conjuntos/conjunto_de_dama_jordan_gris_con/Amarillo_1_1765140042020.jpg"
+    },
+    "status": "draft",
+    "createdAt": "2025-12-07T20:40:43.296Z",
+    "updatedAt": "2025-12-07T20:40:43.296Z"
+  },
+  {
+    "id": "prod_1765140044169_oztm8uxp5",
+    "name": "conjunto de dama jordan",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765140044/mascotitas/products/mascotitas/products/Conjuntos/conjunto_de_dama_jordan/Negro_1_1765140043296.jpg",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765140044/mascotitas/products/mascotitas/products/Conjuntos/conjunto_de_dama_jordan/Negro_1_1765140043296.jpg"
+    ],
+    "category": "Conjuntos",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Negro"
+    ],
+    "colorImages": {
+      "Negro": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765140044/mascotitas/products/mascotitas/products/Conjuntos/conjunto_de_dama_jordan/Negro_1_1765140043296.jpg"
+    },
+    "status": "draft",
+    "createdAt": "2025-12-07T20:40:44.169Z",
+    "updatedAt": "2025-12-07T20:40:44.169Z"
+  }
+]

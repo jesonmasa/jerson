@@ -1,0 +1,203 @@
+﻿
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+
+> constructor-monorepo@1.0.0 build C:\Users\Usuario\OneDrive\Documentos\constructor
+> pnpm run build --recursive "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive" "--recursive"
+
+node.exe : "pnpm" no se 
+reconoce como un comando 
+interno o externo,
+En C:\Users\Usuario\AppDat
+a\Roaming\npm\pnpm.ps1: 
+24 Carácter: 5
++     & "node$exe"  "$base
+dir/node_modules/pnpm/bin/
+pnpm.cjs" $args
++     ~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
+    + CategoryInfo        
+      : NotSpecified: ("  
+  pnpm" no se re...erno   
+  o externo,:String) [    
+], RemoteException
+    + FullyQualifiedError 
+   Id : NativeCommandErr  
+  or
+ 
+programa o archivo por 
+lotes ejecutable.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.

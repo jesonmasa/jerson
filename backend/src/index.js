@@ -1,0 +1,171 @@
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+
+// CARGAR ENV PRIMERO
+dotenv.config();
+
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { securityLogger } from './security/validation.js';
+
+// Import routes
+import productsRouter from './routes/products.js';
+import pagesRouter from './routes/pages.js';
+import categoriesRouter from './routes/categories.js';
+import ordersRouter from './routes/orders.js';
+import statsRouter from './routes/stats.js';
+import uploadRouter from './routes/upload.js';
+import bulkUploadRouter from './routes/bulk-upload.js';
+import shipmentsRouter from './routes/shipments.js';
+import galleryRouter from './routes/gallery.js';
+
+// NEW: Multi-tenant routes
+import authV2Router from './routes/auth-v2.js';
+import superAdminRouter from './routes/super-admin.js';
+import subscriptionsRouter from './routes/subscriptions.js';
+import marketplaceRouter from './routes/marketplace.js';
+
+// NEW: Multi-tenant data routes (v2)
+import productsV2Router from './routes/products-v2.js';
+import ordersV2Router from './routes/orders-v2.js';
+import categoriesV2Router from './routes/categories-v2.js';
+import configV2Router from './routes/config-v2.js';
+
+// Initialize multi-tenant database (Supabase or file-based)
+import { platform } from './database/db.js';
+platform.init().then(() => console.log('✅ Database ready'));
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const app = express();
+const PORT = process.env.PORT || 3001;
+
+// Logger de seguridad (detecta actividad sospechosa)
+app.use(securityLogger);
+
+// ============================================
+// CORS - Orígenes Permitidos (PRIMERO)
+// ============================================
+app.use(cors({
+  origin: true, // Permitir cualquier origen temporalmente para debug
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+}));
+
+// ============================================
+// SEGURIDAD - IMPLEMENTACIÓN NATIVA (Sin npm)
+// ============================================
+
+// Rate Limiting Manual con Map
+const rateLimitStore = new Map();
+const RATE_LIMIT_WINDOW = 15 * 60 * 1000; // 15 minutos
+const RATE_LIMIT_MAX = 5000; // Aumentado para desarrollo/carga masiva
+
+const rateLimiter = (req, res, next) => {
+  if (req.method === 'OPTIONS') return next(); // No limitar pre-flight
+
+  const ip = req.ip || req.connection.remoteAddress || 'unknown';
+  const now = Date.now();
+
+  if (!rateLimitStore.has(ip)) {
+    rateLimitStore.set(ip, { count: 1, startTime: now });
+    return next();
+  }
+
+  const record = rateLimitStore.get(ip);
+
+  if (now - record.startTime > RATE_LIMIT_WINDOW) {
+    rateLimitStore.set(ip, { count: 1, startTime: now });
+    return next();
+  }
+
+  if (record.count < RATE_LIMIT_MAX) {
+    record.count++;
+    return next();
+  }
+
+  console.warn(`⚠️ Rate limit exceeded for IP: ${ip}`);
+  return res.status(429).json({
+    error: 'Demasiadas solicitudes. Estás enviando muchas peticiones muy rápido.'
+  });
+};
+
+// Limpiar IPs antiguas cada 30 min
+setInterval(() => {
+  const now = Date.now();
+  for (const [ip, record] of rateLimitStore.entries()) {
+    if (now - record.startTime > RATE_LIMIT_WINDOW * 2) {
+      rateLimitStore.delete(ip);
+    }
+  }
+}, 30 * 60 * 1000);
+
+// Headers de Seguridad Nativos (Sin Helmet)
+const securityHeaders = (req, res, next) => {
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  res.setHeader('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
+  next();
+};
+
+app.use(rateLimiter);
+app.use(securityHeaders);
+
+// Body parsing - Aumentado a 200mb para soportar ZIPs grandes en base64
+app.use(express.json({ limit: '200mb' }));
+app.use(express.urlencoded({ extended: true, limit: '200mb' }));
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+
+// Routes
+app.use('/api/products', productsRouter);
+app.use('/api/pages', pagesRouter);
+app.use('/api/categories', categoriesRouter);
+app.use('/api/orders', ordersRouter);
+app.use('/api/stats', statsRouter);
+app.use('/api/upload', uploadRouter);
+app.use('/api/bulk-upload', bulkUploadRouter);
+app.use('/api/shipments', shipmentsRouter);
+app.use('/api/gallery', galleryRouter);
+
+// NEW: Multi-tenant Auth & Super Admin
+app.use('/api/auth', authV2Router);
+app.use('/api/super-admin', superAdminRouter);
+app.use('/api/subscriptions', subscriptionsRouter);
+app.use('/api/marketplace', marketplaceRouter);
+
+// NEW: Multi-tenant data routes (v2) - Aisladas por tenant
+app.use('/api/v2/products', productsV2Router);
+app.use('/api/v2/orders', ordersV2Router);
+app.use('/api/v2/categories', categoriesV2Router);
+app.use('/api/v2/config', configV2Router);
+
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok', message: 'Constructor API', security: 'native', multiTenant: true });
+});
+
+// Error handling
+app.use((err, req, res, next) => {
+  console.error(`❌ [${new Date().toISOString()}]:`, err.message);
+  res.status(err.status || 500).json({ error: 'Error interno' });
+});
+
+app.use((req, res) => {
+  res.status(404).json({ error: 'Ruta no encontrada' });
+});
+
+app.listen(PORT, () => {
+  console.log(`🚀 Backend: http://localhost:${PORT}`);
+  console.log(`🔒 Seguridad nativa activa`);
+  console.log('✅✅✅ SERVER FIXED KEY ACTIVE - RESTART SUCCESSFUL ✅✅✅');
+}).on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error(`❌ Puerto ${PORT} en uso.`);
+  } else {
+    console.error('❌ Error:', err);
+  }
+});

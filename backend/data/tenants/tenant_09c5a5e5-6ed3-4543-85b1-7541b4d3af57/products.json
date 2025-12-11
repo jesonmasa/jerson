@@ -1,0 +1,311 @@
+[
+  {
+    "id": "40bd1c35-eaa6-40df-b611-d6438a5a8480",
+    "name": "buso jordan",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392532/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/buso_jordan/Amarillo_1_1765392530813.png",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392532/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/buso_jordan/Amarillo_1_1765392530813.png",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392533/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/buso_jordan/Negro_2_1765392532613.png",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392534/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/buso_jordan/Rosado_3_1765392533818.png"
+    ],
+    "category": "productos",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Amarillo",
+      "Negro",
+      "Rosado"
+    ],
+    "colorImages": {
+      "Amarillo": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392532/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/buso_jordan/Amarillo_1_1765392530813.png",
+      "Negro": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392533/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/buso_jordan/Negro_2_1765392532613.png",
+      "Rosado": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392534/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/buso_jordan/Rosado_3_1765392533818.png"
+    },
+    "status": "published",
+    "createdAt": "2025-12-10T18:48:56.729Z",
+    "updatedAt": "2025-12-10T18:49:55.402Z"
+  },
+  {
+    "id": "1241892d-cc54-47f5-b34d-fb00626d81cc",
+    "name": "buso",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392537/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/buso/Azul_1_1765392536730.png",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392537/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/buso/Azul_1_1765392536730.png",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392538/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/buso/Cafe_2_1765392537895.png",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392539/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/buso/Negro_3_1765392539067.png"
+    ],
+    "category": "productos",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Azul",
+      "Cafe",
+      "Negro"
+    ],
+    "colorImages": {
+      "Azul": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392537/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/buso/Azul_1_1765392536730.png",
+      "Cafe": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392538/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/buso/Cafe_2_1765392537895.png",
+      "Negro": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392539/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/buso/Negro_3_1765392539067.png"
+    },
+    "status": "published",
+    "createdAt": "2025-12-10T18:48:59.956Z",
+    "updatedAt": "2025-12-10T18:49:55.401Z"
+  },
+  {
+    "id": "51752643-9766-4206-9461-41165728ff65",
+    "name": "buso blanco y",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392540/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/buso_blanco_y/Negro_1_1765392539958.png",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392540/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/buso_blanco_y/Negro_1_1765392539958.png"
+    ],
+    "category": "productos",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Negro"
+    ],
+    "colorImages": {
+      "Negro": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392540/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/buso_blanco_y/Negro_1_1765392539958.png"
+    },
+    "status": "published",
+    "createdAt": "2025-12-10T18:49:00.967Z",
+    "updatedAt": "2025-12-10T18:49:55.400Z"
+  },
+  {
+    "id": "0849d527-db6a-46e8-a6af-7dcefa7ad77b",
+    "name": "camisa jeans",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392542/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/camisa_jeans/Cafe_1_1765392540987.png",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392542/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/camisa_jeans/Cafe_1_1765392540987.png",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392543/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/camisa_jeans/Negra_2_1765392542496.png"
+    ],
+    "category": "productos",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Cafe",
+      "Negra"
+    ],
+    "colorImages": {
+      "Cafe": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392542/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/camisa_jeans/Cafe_1_1765392540987.png",
+      "Negra": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392543/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/camisa_jeans/Negra_2_1765392542496.png"
+    },
+    "status": "published",
+    "createdAt": "2025-12-10T18:49:04.317Z",
+    "updatedAt": "2025-12-10T18:49:55.399Z"
+  },
+  {
+    "id": "3110b8f8-ea49-4093-81da-94bf765129e0",
+    "name": "cartera de dama (2)",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392545/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/cartera_de_dama__2_/Unico_1_1765392544319.png",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392545/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/cartera_de_dama__2_/Unico_1_1765392544319.png"
+    ],
+    "category": "productos",
+    "stock": 1,
+    "sizes": [],
+    "colors": [],
+    "colorImages": {},
+    "status": "published",
+    "createdAt": "2025-12-10T18:49:05.801Z",
+    "updatedAt": "2025-12-10T18:49:55.397Z"
+  },
+  {
+    "id": "301a59b4-2cbf-4cc7-acc3-1951e7b9c111",
+    "name": "cartera de dama",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392546/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/cartera_de_dama/Unico_1_1765392545802.png",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392546/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/cartera_de_dama/Unico_1_1765392545802.png"
+    ],
+    "category": "productos",
+    "stock": 1,
+    "sizes": [],
+    "colors": [],
+    "colorImages": {},
+    "status": "published",
+    "createdAt": "2025-12-10T18:49:07.061Z",
+    "updatedAt": "2025-12-10T18:49:55.396Z"
+  },
+  {
+    "id": "b648da26-096d-4bfc-a890-e93ef5788182",
+    "name": "kay ali",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392547/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/kay_ali/Unico_1_1765392547062.png",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392547/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/kay_ali/Unico_1_1765392547062.png"
+    ],
+    "category": "productos",
+    "stock": 1,
+    "sizes": [],
+    "colors": [],
+    "colorImages": {},
+    "status": "published",
+    "createdAt": "2025-12-10T18:49:08.104Z",
+    "updatedAt": "2025-12-10T18:49:55.394Z"
+  },
+  {
+    "id": "7bbe1ff3-9e0b-4b68-afc2-e9e71c9efb85",
+    "name": "perfume arabe",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392549/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/perfume_arabe/Unico_1_1765392548105.png",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392549/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/perfume_arabe/Unico_1_1765392548105.png"
+    ],
+    "category": "productos",
+    "stock": 1,
+    "sizes": [],
+    "colors": [],
+    "colorImages": {},
+    "status": "published",
+    "createdAt": "2025-12-10T18:49:10.596Z",
+    "updatedAt": "2025-12-10T18:49:55.392Z"
+  },
+  {
+    "id": "1a78835f-a82c-4579-b4be-251491ac5a15",
+    "name": "perfume one million",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392551/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/perfume_one_million/Unico_1_1765392550598.png",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392551/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/perfume_one_million/Unico_1_1765392550598.png"
+    ],
+    "category": "productos",
+    "stock": 1,
+    "sizes": [],
+    "colors": [],
+    "colorImages": {},
+    "status": "published",
+    "createdAt": "2025-12-10T18:49:12.151Z",
+    "updatedAt": "2025-12-10T18:49:55.391Z"
+  },
+  {
+    "id": "fd8922a2-0423-44e0-ad70-8f5bfb9ab563",
+    "name": "morral fashion dama",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392552/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/morral_fashion_dama/Negro_1_1765392552153.png",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392552/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/morral_fashion_dama/Negro_1_1765392552153.png",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392554/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/morral_fashion_dama/Rojo_2_1765392553362.png",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392555/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/morral_fashion_dama/Verde_3_1765392554638.png"
+    ],
+    "category": "productos",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Negro",
+      "Rojo",
+      "Verde"
+    ],
+    "colorImages": {
+      "Negro": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392552/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/morral_fashion_dama/Negro_1_1765392552153.png",
+      "Rojo": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392554/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/morral_fashion_dama/Rojo_2_1765392553362.png",
+      "Verde": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392555/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/morral_fashion_dama/Verde_3_1765392554638.png"
+    },
+    "status": "published",
+    "createdAt": "2025-12-10T18:49:16.049Z",
+    "updatedAt": "2025-12-10T18:49:55.390Z"
+  },
+  {
+    "id": "7e5ea3bf-8158-4f33-9268-e1b82500eb41",
+    "name": "morral gufansen",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392556/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/morral_gufansen/Gris_1_1765392556051.png",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392556/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/morral_gufansen/Gris_1_1765392556051.png",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392558/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/morral_gufansen/Negro_2_1765392557945.png"
+    ],
+    "category": "productos",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Gris",
+      "Negro"
+    ],
+    "colorImages": {
+      "Gris": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392556/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/morral_gufansen/Gris_1_1765392556051.png",
+      "Negro": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392558/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/morral_gufansen/Negro_2_1765392557945.png"
+    },
+    "status": "published",
+    "createdAt": "2025-12-10T18:49:18.980Z",
+    "updatedAt": "2025-12-10T18:49:55.389Z"
+  },
+  {
+    "id": "a6f6ebb9-1ace-4618-9263-647da0f8555c",
+    "name": "tenis jordan blanco",
+    "subtitle": "",
+    "price": null,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392559/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/tenis_jordan_blanco/Azul_1_1765392558981.png",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392559/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/tenis_jordan_blanco/Azul_1_1765392558981.png",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392561/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/tenis_jordan_blanco/Rojo_2_1765392560254.png"
+    ],
+    "category": "productos",
+    "stock": 1,
+    "sizes": [],
+    "colors": [
+      "Azul",
+      "Rojo"
+    ],
+    "colorImages": {
+      "Azul": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392559/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/tenis_jordan_blanco/Azul_1_1765392558981.png",
+      "Rojo": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392561/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/tenis_jordan_blanco/Rojo_2_1765392560254.png"
+    },
+    "status": "published",
+    "createdAt": "2025-12-10T18:49:21.392Z",
+    "updatedAt": "2025-12-10T18:49:55.387Z"
+  },
+  {
+    "id": "e2a523ad-47a0-47fa-88f9-6ad7837f3937",
+    "name": "zapatos fashion",
+    "subtitle": "",
+    "price": 5000,
+    "description": "",
+    "image": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392562/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/zapatos_fashion/Blancos_1_1765392561394.png",
+    "images": [
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392562/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/zapatos_fashion/Blancos_1_1765392561394.png",
+      "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392563/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/zapatos_fashion/Negros_2_1765392562373.png"
+    ],
+    "category": "productos",
+    "stock": 2,
+    "sizes": [],
+    "colors": [
+      "Blancos",
+      "Negros"
+    ],
+    "colorImages": {
+      "Blancos": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392562/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/zapatos_fashion/Blancos_1_1765392561394.png",
+      "Negros": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765392563/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/09c5a5e5-6ed3-4543-85b1-7541b4d3af57/products/productos/zapatos_fashion/Negros_2_1765392562373.png"
+    },
+    "status": "published",
+    "createdAt": "2025-12-10T18:49:23.465Z",
+    "updatedAt": "2025-12-10T19:54:58.391Z"
+  }
+]

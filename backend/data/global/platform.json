@@ -1,0 +1,77 @@
+{
+  "users": [
+    {
+      "id": "fcaca11c-1e01-4b5b-bc91-7cd23fe66d8a",
+      "tenantId": "05c94ec4-18ae-4919-8250-7df8991e7b22",
+      "email": "adminjerson@123",
+      "password": "$2a$12$C6ULvpudQ2YE7Yb.oVxgyOmPIs048GkJPSbF9901MvN.gT4EtIn1S",
+      "name": "Super Admin Jerson",
+      "role": "super_admin",
+      "emailVerified": true,
+      "createdAt": "2025-12-07T23:45:58.390Z",
+      "updatedAt": "2025-12-07T23:45:58.390Z"
+    },
+    {
+      "id": "15975732-fc4c-4b2b-bccb-15227a5553d1",
+      "tenantId": "8fb0b678-5711-4418-b1e3-ddb0a222fa9c",
+      "email": "mazaabor22@gmail.com",
+      "password": "$2a$12$2g6Rz50A5NRWyAvfpFYCguQiBOT9/l/JebhiqrkZM57FYXraYUnW6",
+      "name": "pedro infante",
+      "role": "owner",
+      "emailVerified": true,
+      "createdAt": "2025-12-07T23:56:12.241Z",
+      "updatedAt": "2025-12-07T23:56:12.250Z"
+    },
+    {
+      "id": "5b0aeb01-c3cb-4621-a834-a1a9ad835a0e",
+      "tenantId": "09c5a5e5-6ed3-4543-85b1-7541b4d3af57",
+      "email": "marco@gmail.com",
+      "password": "$2a$12$0.x.bpcP..UVjbpKiePiwutMbrsIQWOQm5U68npaDbpjxiI5jXoli",
+      "name": "marco",
+      "role": "owner",
+      "emailVerified": true,
+      "createdAt": "2025-12-08T05:44:07.947Z",
+      "updatedAt": "2025-12-08T05:44:07.978Z"
+    },
+    {
+      "id": "045b1c8d-a178-4b9d-9504-38f80cef1c40",
+      "tenantId": "333f2efa-ee37-4c94-9c9b-806a9fb9a933",
+      "email": "pepe@pepe.com",
+      "password": "$2a$12$JdyDBpCbUgshSf4eHTcoKe6nF7Avea5QV8zAHrUjk.agomYyMX9jG",
+      "name": "pepe",
+      "role": "owner",
+      "emailVerified": true,
+      "createdAt": "2025-12-08T15:58:37.866Z",
+      "updatedAt": "2025-12-08T18:12:00.000Z"
+    },
+    {
+      "id": "user_naira_admin",
+      "tenantId": "naira-sport-legacy",
+      "email": "admin@store.com",
+      "password": "$2a$12$JdyDBpCbUgshSf4eHTcoKe6nF7Avea5QV8zAHrUjk.agomYyMX9jG",
+      "name": "Admin Constructor",
+      "role": "owner",
+      "emailVerified": true,
+      "createdAt": "2025-12-09T17:00:00.000Z",
+      "updatedAt": "2025-12-09T17:00:00.000Z"
+    },
+    {
+      "id": "67104322-bde7-4610-b991-fddba1933858",
+      "tenantId": "3c437bf5-a815-40ba-9c53-4526428b1076",
+      "email": "juanmatos@gmail.com",
+      "password": "$2a$12$MyTJNrgM2I1r.2TIfv2lbONKevN1.9xbDD3inrOsHKP0tBfvdO4t6",
+      "name": "juan matos",
+      "role": "owner",
+      "emailVerified": true,
+      "createdAt": "2025-12-10T19:57:12.248Z",
+      "updatedAt": "2025-12-10T19:57:12.257Z"
+    }
+  ],
+  "subscriptions": [],
+  "verification_codes": [],
+  "platform_stats": {
+    "total_tenants": 5,
+    "active_subscriptions": 0,
+    "monthly_revenue": 0
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "storeName": "naira sport",
+  "themeId": "tienda-mascotas",
+  "logoUrl": "",
+  "bannerImage": "https://res.cloudinary.com/dpksutdjn/image/upload/v1765140353/banners/img_1765140351305.png",
+  "contactEmail": "contacto@naira.com",
+  "contactPhone": "+57 313 7471549",
+  "footerText": "© 2025 naira sport - Todos los derechos reservados",
+  "socialLinks": {
+    "facebook": "https://www.facebook.com/search/top/?q=joha%20estrada",
+    "instagram": "https://instagram.com",
+    "whatsapp": "https://wa.me/"
+  },
+  "colors": {
+    "primary": "#3B82F6",
+    "secondary": "#10B981"
+  }
+}

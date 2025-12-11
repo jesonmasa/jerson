@@ -1,0 +1,27 @@
+{
+  "name": "constructor-monorepo",
+  "version": "1.0.0",
+  "description": "Constructor - E-commerce platform builder for fashion and beauty",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "admin",
+    "storefront",
+    "shared"
+  ],
+  "scripts": {
+    "dev": "concurrently \"pnpm run dev:backend\" \"pnpm run dev:admin\" \"pnpm run dev:storefront\"",
+    "dev:backend": "pnpm run dev --filter backend",
+    "dev:admin": "pnpm run dev --filter admin",
+    "dev:storefront": "pnpm run dev --filter storefront",
+    "build": "pnpm -r run build",
+    "test": "pnpm -r run test"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  }
+}
