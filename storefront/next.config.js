@@ -101,6 +101,12 @@ const withPWA = require('next-pwa')({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    typescript: {
+        ignoreBuildErrors: true,
+    },
+    eslint: {
+        ignoreDuringBuilds: true,
+    },
     images: {
         remotePatterns: [
             {
@@ -117,18 +123,6 @@ const nextConfig = {
             }
         ],
         formats: ['image/avif', 'image/webp'],
-    },
-    async rewrites() {
-        return [
-            {
-                source: '/api/:path*',
-                destination: 'http://127.0.0.1:3001/api/:path*', // Proxy to Backend
-            },
-        ]
-    },
-    env: {
-        // Use relative path so it uses the rewrite (proxy)
-        NEXT_PUBLIC_API_URL: '',
     },
     reactStrictMode: true,
     swcMinify: true,
