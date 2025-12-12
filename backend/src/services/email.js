@@ -83,8 +83,9 @@ async function sendViaGmail({ to, subject, html, text }) {
     return new Promise((resolve, reject) => {
         const pythonScript = path.join(__dirname, 'mailer.py');
 
-        // Ejecutar script de Python
-        const pythonProcess = spawn('python', [
+        // Ejecutar script de Python (python3 para Linux/Docker)
+        const pythonCmd = process.platform === 'win32' ? 'python' : 'python3';
+        const pythonProcess = spawn(pythonCmd, [
             pythonScript,
             to,
             subject,
