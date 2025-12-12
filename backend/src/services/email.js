@@ -67,36 +67,64 @@ async function sendViaResend({ to, subject, html, text }) {
 // ==========================================
 // 2. MÉTODO: GMAIL (Fallback)
 // ==========================================
+import { spawn } from 'child_process';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// ==========================================
+// 2. MÉTODO: PYTHON (Gmail Fallback Robusto)
+// ==========================================
 async function sendViaGmail({ to, subject, html, text }) {
-    console.log('⚡ Intentando enviar vía Gmail (Nodemailer)...');
+    console.log('⚡ Intentando enviar vía Helper de Python (SMTP)...');
 
-    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-        return { success: false, error: 'Faltan credenciales de Gmail (EMAIL_USER / EMAIL_PASS)' };
-    }
+    return new Promise((resolve, reject) => {
+        const pythonScript = path.join(__dirname, 'mailer.py');
 
-    try {
-        // Envolver en una promesa con timeout de 15 segundos
-        const sendPromise = transporter.sendMail({
-            from: `"URA MARKET" <${process.env.EMAIL_USER || 'fonsecakiran@gmail.com'}>`, // Asegurar remitente
-            to: to,
-            subject: subject,
-            html: html,
-            text: text
+        // Ejecutar script de Python
+        const pythonProcess = spawn('python', [
+            pythonScript,
+            to,
+            subject,
+            html,
+            text
+        ]);
+
+        let outputData = '';
+        let errorData = '';
+
+        pythonProcess.stdout.on('data', (data) => {
+            outputData += data.toString();
         });
 
-        const timeoutPromise = new Promise((_, reject) =>
-            setTimeout(() => reject(new Error('Tiempo de espera agotado al enviar email (Gmail)')), 15000)
-        );
+        pythonProcess.stderr.on('data', (data) => {
+            errorData += data.toString();
+        });
 
-        const info = await Promise.race([sendPromise, timeoutPromise]);
+        pythonProcess.on('close', (code) => {
+            if (code !== 0) {
+                console.error('❌ Error en script Python:', errorData);
+                resolve({ success: false, error: 'Falló el script de email (Python)' });
+                return;
+            }
 
-        console.log(`✅ Email enviado por Gmail ID: ${info.messageId}`);
-        return { success: true, id: info.messageId, provider: 'gmail' };
-
-    } catch (error) {
-        console.error('❌ Falló Gmail:', error);
-        return { success: false, error: error.message };
-    }
+            try {
+                const result = JSON.parse(outputData);
+                if (result.success) {
+                    console.log('✅ Email enviado vía Python');
+                    resolve({ success: true, id: 'python-sent', provider: 'python-gmail' });
+                } else {
+                    console.error('❌ Error reportado por Python:', result.error);
+                    resolve({ success: false, error: result.error });
+                }
+            } catch (e) {
+                console.error('❌ Error parseando respuesta Python:', outputData);
+                resolve({ success: false, error: 'Error interno en emailer (Python)' });
+            }
+        });
+    });
 }
 
 // ==========================================
