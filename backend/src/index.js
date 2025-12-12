@@ -124,28 +124,36 @@ app.use(express.urlencoded({ extended: true, limit: '200mb' }));
 // En producción real, los uploads van directo a Cloudinary
 app.use('/uploads', express.static(path.join(os.tmpdir(), 'uploads')));
 
-// Routes
-app.use('/api/products', productsRouter);
-app.use('/api/pages', pagesRouter);
-app.use('/api/categories', categoriesRouter);
-app.use('/api/orders', ordersRouter);
-app.use('/api/stats', statsRouter);
-app.use('/api/upload', uploadRouter);
-app.use('/api/bulk-upload', bulkUploadRouter);
-app.use('/api/shipments', shipmentsRouter);
-app.use('/api/gallery', galleryRouter);
+// Routes - Support both /api prefix and root paths for Vercel flexibility
+const routes = [
+  { path: '/products', router: productsRouter },
+  { path: '/pages', router: pagesRouter },
+  { path: '/categories', router: categoriesRouter },
+  { path: '/orders', router: ordersRouter },
+  { path: '/stats', router: statsRouter },
+  { path: '/upload', router: uploadRouter },
+  { path: '/bulk-upload', router: bulkUploadRouter },
+  { path: '/shipments', router: shipmentsRouter },
+  { path: '/gallery', router: galleryRouter },
 
-// NEW: Multi-tenant Auth & Super Admin
-app.use('/api/auth', authV2Router);
-app.use('/api/super-admin', superAdminRouter);
-app.use('/api/subscriptions', subscriptionsRouter);
-app.use('/api/marketplace', marketplaceRouter);
+  // Auth & Multi-tenant
+  { path: '/auth', router: authV2Router },
+  { path: '/super-admin', router: superAdminRouter },
+  { path: '/subscriptions', router: subscriptionsRouter },
+  { path: '/marketplace', router: marketplaceRouter },
 
-// NEW: Multi-tenant data routes (v2) - Aisladas por tenant
-app.use('/api/v2/products', productsV2Router);
-app.use('/api/v2/orders', ordersV2Router);
-app.use('/api/v2/categories', categoriesV2Router);
-app.use('/api/v2/config', configV2Router);
+  // V2 Routes
+  { path: '/v2/products', router: productsV2Router },
+  { path: '/v2/orders', router: ordersV2Router },
+  { path: '/v2/categories', router: categoriesV2Router },
+  { path: '/v2/config', router: configV2Router }
+];
+
+// Mount all routes
+routes.forEach(({ path, router }) => {
+  app.use(`/api${path}`, router); // Standard /api/resource
+  app.use(path, router);          // Fallback /resource (if Vercel rewrite strips api)
+});
 
 // ALERTA: Ruta de DIAGNÓSTICO TEMPORAL (Borrar en producción final)
 import { sendVerificationEmail } from './services/email.js';
