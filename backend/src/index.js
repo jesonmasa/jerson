@@ -191,7 +191,7 @@ app.use((err, req, res, next) => {
 });
 
 app.use((req, res) => {
-  res.status(404).json({ error: 'Ruta no encontrada' });
+  res.status(404).json({ error: `Ruta no encontrada en Backend Vercel (${req.originalUrl})` });
 });
 
 // Exportar app para Vercel
