@@ -26,7 +26,13 @@ export default function LoginPage() {
         setError('');
 
         try {
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+            let apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://constructor-backend-i94k.onrender.com/api';
+            // Asegurar que termine en /api
+            if (!apiUrl.endsWith('/api')) {
+                apiUrl = `${apiUrl}/api`;
+            }
+            if (apiUrl.endsWith('/api/api')) apiUrl = apiUrl.replace('/api/api', '/api');
+
             const res = await fetch(`${apiUrl}/auth/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },

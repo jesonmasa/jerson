@@ -22,7 +22,16 @@ export default function RegisterPage() {
         setError('');
 
         try {
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://constructor-backend-i94k.onrender.com/api';
+            let apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://constructor-backend-i94k.onrender.com/api';
+            // Asegurar que termine en /api
+            if (!apiUrl.endsWith('/api')) {
+                apiUrl = `${apiUrl}/api`;
+            }
+            // Si por error tiene termina en /api/api, corregirlo (edge case)
+            if (apiUrl.endsWith('/api/api')) {
+                apiUrl = apiUrl.substring(0, apiUrl.length - 4);
+            }
+
             const res = await fetch(`${apiUrl}/auth/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
