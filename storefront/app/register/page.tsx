@@ -6,79 +6,49 @@ import { useRouter } from 'next/navigation';
 
 export default function RegisterPage() {
     const router = useRouter();
-    const [step, setStep] = useState(1); // 1: Datos básicos, 2: Verificación
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [success, setSuccess] = useState(false);
 
     // Form Data
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [code, setCode] = useState('');
     const [password, setPassword] = useState('');
 
-    // Paso 1: Iniciar Registro (Enviar Código)
-    const handleInitRegister = async (e: React.FormEvent) => {
+    // Registro con Supabase Auth
+    const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
         setError('');
 
         try {
-            // FALLBACK FORZADO A PRODUCCIÓN PARA EVITAR ERROR DE CONEXIÓN
             const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://constructor-backend-i94k.onrender.com/api';
-            const res = await fetch(`${apiUrl}/auth/register/init`, {
+            const res = await fetch(`${apiUrl}/auth/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, name })
+                body: JSON.stringify({ email, password, name })
             });
 
             const data = await res.json();
 
             if (!res.ok) {
-                throw new Error(data.error || 'Error al iniciar registro');
+                throw new Error(data.error || 'Error al registrar');
             }
 
-            // Éxito, pasar al paso 2
-            setStep(2);
+            // Si hay sesión activa (email ya confirmado), redirigir
+            if (data.session?.accessToken) {
+                localStorage.setItem('token', data.session.accessToken);
+                localStorage.setItem('user', JSON.stringify(data.user));
 
-        } catch (err: any) {
-            setError(err.message);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    // Paso 2: Verificar y Completar (Crear cuenta)
-    const handleVerifyAndRegister = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setLoading(true);
-        setError('');
-
-        try {
-            // FALLBACK FORZADO A PRODUCCIÓN
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://constructor-backend-i94k.onrender.com/api';
-            const res = await fetch(`${apiUrl}/auth/register/verify`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, code, name, password })
-            });
-
-            const data = await res.json();
-
-            if (!res.ok) {
-                throw new Error(data.error || 'Error al completar registro');
-            }
-
-            // REGISTRO EXITOSO
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('user', JSON.stringify(data.user));
-
-            // REDIRECCIÓN INTELIGENTE
-            const role = data.user.role;
-            if (role === 'super_admin' || role === 'owner' || role === 'admin') {
-                // Redirigir al panel administrativo
-                window.location.href = `https://jerson-admin.vercel.app/login?email=${encodeURIComponent(email)}&auto=true`;
+                const role = data.user.role;
+                if (role === 'super_admin' || role === 'owner' || role === 'admin') {
+                    window.location.href = `https://jerson-admin.vercel.app/login?email=${encodeURIComponent(email)}&auto=true`;
+                } else {
+                    router.push('/');
+                }
             } else {
-                router.push('/');
+                // Mostrar mensaje de verificación
+                setSuccess(true);
             }
 
         } catch (err: any) {
@@ -87,6 +57,45 @@ export default function RegisterPage() {
             setLoading(false);
         }
     };
+
+    // Pantalla de éxito (verificar email)
+    if (success) {
+        return (
+            <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 font-sans">
+                <div className="sm:mx-auto sm:w-full sm:max-w-md">
+                    <Link href="/" className="flex justify-center text-4xl font-black tracking-tighter text-red-600 mb-6">
+                        Ura<span className="text-gray-800 text-lg font-normal ml-1 mt-auto mb-1">Market</span>
+                    </Link>
+                </div>
+
+                <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+                    <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 text-center">
+                        <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-4">
+                            <svg className="h-8 w-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <h2 className="text-2xl font-bold text-gray-900 mb-2">¡Revisa tu correo!</h2>
+                        <p className="text-gray-600 mb-4">
+                            Hemos enviado un enlace de verificación a:
+                        </p>
+                        <p className="font-semibold text-gray-900 mb-6">{email}</p>
+                        <p className="text-sm text-gray-500 mb-4">
+                            Haz clic en el enlace del correo para activar tu cuenta.
+                        </p>
+                        <p className="text-xs text-gray-400">
+                            ¿No lo ves? Revisa tu carpeta de spam.
+                        </p>
+                        <div className="mt-6">
+                            <Link href="/login" className="text-red-600 hover:text-red-500 font-medium">
+                                Ir a iniciar sesión
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 font-sans">
@@ -122,114 +131,76 @@ export default function RegisterPage() {
                         </div>
                     )}
 
-                    {step === 1 ? (
-                        <form className="space-y-6" onSubmit={handleInitRegister}>
-                            <div>
-                                <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                                    Nombre completo
-                                </label>
-                                <div className="mt-1">
-                                    <input
-                                        id="name"
-                                        name="name"
-                                        type="text"
-                                        required
-                                        value={name}
-                                        onChange={(e) => setName(e.target.value)}
-                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
-                                    />
-                                </div>
+                    <form className="space-y-6" onSubmit={handleRegister}>
+                        <div>
+                            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                                Nombre completo
+                            </label>
+                            <div className="mt-1">
+                                <input
+                                    id="name"
+                                    name="name"
+                                    type="text"
+                                    required
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
+                                />
                             </div>
+                        </div>
 
-                            <div>
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                                    Correo electrónico
-                                </label>
-                                <div className="mt-1">
-                                    <input
-                                        id="email"
-                                        name="email"
-                                        type="email"
-                                        required
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
-                                    />
-                                </div>
+                        <div>
+                            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                                Correo electrónico
+                            </label>
+                            <div className="mt-1">
+                                <input
+                                    id="email"
+                                    name="email"
+                                    type="email"
+                                    required
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
+                                />
                             </div>
+                        </div>
 
-                            <div>
-                                <button
-                                    type="submit"
-                                    disabled={loading}
-                                    className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${loading ? 'bg-red-400' : 'bg-red-600 hover:bg-red-700'} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors`}
-                                >
-                                    {loading ? 'Enviando código...' : 'Continuar'}
-                                </button>
+                        <div>
+                            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                                Contraseña
+                            </label>
+                            <div className="mt-1">
+                                <input
+                                    id="password"
+                                    name="password"
+                                    type="password"
+                                    required
+                                    minLength={6}
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
+                                    placeholder="Mínimo 6 caracteres"
+                                />
                             </div>
-                        </form>
-                    ) : (
-                        <form className="space-y-6" onSubmit={handleVerifyAndRegister}>
-                            <div className="text-center mb-4">
-                                <p className="text-sm text-gray-500">
-                                    Hemos enviado un código a <strong>{email}</strong>
-                                </p>
-                                <button
-                                    type="button"
-                                    onClick={() => setStep(1)}
-                                    className="text-xs text-red-600 hover:underline mt-1"
-                                >
-                                    Cambiar correo
-                                </button>
-                            </div>
+                        </div>
 
-                            <div>
-                                <label htmlFor="code" className="block text-sm font-medium text-gray-700">
-                                    Código de verificación
-                                </label>
-                                <div className="mt-1">
-                                    <input
-                                        id="code"
-                                        name="code"
-                                        type="text"
-                                        placeholder="Ej: 123456"
-                                        required
-                                        value={code}
-                                        onChange={(e) => setCode(e.target.value)}
-                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm text-center tracking-widest font-mono text-lg"
-                                    />
-                                </div>
-                            </div>
+                        <div>
+                            <button
+                                type="submit"
+                                disabled={loading}
+                                className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${loading ? 'bg-red-400' : 'bg-red-600 hover:bg-red-700'} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors`}
+                            >
+                                {loading ? 'Creando cuenta...' : 'Crear Cuenta'}
+                            </button>
+                        </div>
+                    </form>
 
-                            <div>
-                                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                                    Crea una contraseña
-                                </label>
-                                <div className="mt-1">
-                                    <input
-                                        id="password"
-                                        name="password"
-                                        type="password"
-                                        required
-                                        minLength={6}
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm"
-                                    />
-                                </div>
-                            </div>
-
-                            <div>
-                                <button
-                                    type="submit"
-                                    disabled={loading}
-                                    className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${loading ? 'bg-red-400' : 'bg-red-600 hover:bg-red-700'} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors`}
-                                >
-                                    {loading ? 'Creando cuenta...' : 'Finalizar Registro'}
-                                </button>
-                            </div>
-                        </form>
-                    )}
+                    <div className="mt-6">
+                        <p className="text-xs text-center text-gray-500">
+                            Al registrarte, aceptas nuestros términos de servicio y política de privacidad.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

@@ -21,7 +21,7 @@ import shipmentsRouter from './routes/shipments.js';
 import galleryRouter from './routes/gallery.js';
 
 // NEW: Multi-tenant routes
-import authV2Router from './routes/auth-v2.js';
+import authV2Router from './routes/supabase-auth.js';
 import superAdminRouter from './routes/super-admin.js';
 import subscriptionsRouter from './routes/subscriptions.js';
 import marketplaceRouter from './routes/marketplace.js';
