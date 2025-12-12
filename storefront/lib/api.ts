@@ -1,19 +1,9 @@
 import axios from 'axios'
 
-// Use empty string to default to relative path (uses Next.js rewrites)
-// Use empty string to default to relative path (uses Next.js rewrites)
-let envApiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+// Use relative path so Next.js rewrites can handle the proxying to backend
+const API_URL = '';
 
-// SAFETY CHECK: If we are on Vercel, ignore Render URLs left in env vars
-if (typeof window !== 'undefined' && window.location.hostname.includes('vercel.app')) {
-    if (envApiUrl.includes('render.com')) {
-        console.warn('⚠️ IGNORING RENDER URL IN VERCEL ENVIRONMENT. Forcing relative path.');
-        envApiUrl = '';
-    }
-}
-
-const API_URL = envApiUrl;
-console.log('🔌 API_URL initialized:', API_URL || '(Relative /api for Vercel)');
+console.log('🔌 API_URL initialized: Relative /api (Proxied via next.config.js)');
 
 export const api = axios.create({
     baseURL: `${API_URL}/api`,
