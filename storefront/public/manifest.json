@@ -1,0 +1,1 @@
+﻿{ "name": "URA Market", "short_name": "URA", "icons": [{ "src": "/favicon.ico", "sizes": "64x64", "type": "image/x-icon" }], "theme_color": "#E53E3E", "background_color": "#FFFFFF", "start_url": "/", "display": "standalone" }
