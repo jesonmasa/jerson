@@ -131,3 +131,6 @@ temp/
 .idea/
 *.swp
 *.swo
+
+# Credentials file (sensitive - DO NOT COMMIT)
+credenciales.md
