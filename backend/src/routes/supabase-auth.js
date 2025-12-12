@@ -67,8 +67,9 @@ router.post('/register', async (req, res) => {
                     email: email,
                     name: name,
                     role: email === 'masajerson@gmail.com' ? 'super_admin' : 'owner',
-                    emailVerified: false, // Se marcará true cuando verifique
-                    supabaseAuthId: data.user.id
+                    emailVerified: false,
+                    supabaseAuthId: data.user.id,
+                    password: 'managed_by_supabase_auth' // Placeholder crucial para evitar error NOT NULL
                 });
                 console.log('✅ Usuario creado en tabla platform_users');
             } catch (dbError) {
