@@ -40,7 +40,8 @@ router.post('/register', async (req, res) => {
             options: {
                 data: {
                     name: name,
-                    role: 'owner'
+                    // Si es tu correo, es super_admin. Si no, es owner (dueño de tienda)
+                    role: email === 'masajerson@gmail.com' ? 'super_admin' : 'owner'
                 },
                 emailRedirectTo: `${REDIRECT_URL}/auth/callback`
             }
@@ -65,7 +66,7 @@ router.post('/register', async (req, res) => {
                     id: data.user.id,
                     email: email,
                     name: name,
-                    role: 'owner',
+                    role: email === 'masajerson@gmail.com' ? 'super_admin' : 'owner',
                     emailVerified: false, // Se marcará true cuando verifique
                     supabaseAuthId: data.user.id
                 });
