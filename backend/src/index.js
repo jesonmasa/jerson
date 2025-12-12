@@ -144,6 +144,39 @@ app.use('/api/v2/orders', ordersV2Router);
 app.use('/api/v2/categories', categoriesV2Router);
 app.use('/api/v2/config', configV2Router);
 
+// ALERTA: Ruta de DIAGNÓSTICO TEMPORAL (Borrar en producción final)
+import { sendVerificationEmail } from './services/email.js';
+
+app.get('/api/test-email-live', async (req, res) => {
+  const targetEmail = req.query.email;
+  if (!targetEmail) return res.json({ error: 'Falta ?email=tucorreo@gmail.com' });
+
+  try {
+    console.log(`🧪 Diagnosticando email para: ${targetEmail}`);
+
+    // Verificar variables de entorno
+    const user = process.env.EMAIL_USER ? 'CONFIGURADO' : 'FALTANTE';
+    const pass = process.env.EMAIL_PASS ? 'CONFIGURADO' : 'FALTANTE';
+
+    if (user === 'FALTANTE' || pass === 'FALTANTE') {
+      return res.json({ success: false, error: 'Variables de entorno no encontradas en Render', details: { user, pass } });
+    }
+
+    // Intentar envío real
+    const result = await sendVerificationEmail(targetEmail, '123456(PRUEBA)', 'Tester');
+
+    res.json({
+      success: result.success,
+      id: result.id,
+      error: result.error,
+      envStatus: { user, pass }
+    });
+
+  } catch (e) {
+    res.json({ success: false, error: e.message, stack: e.stack });
+  }
+});
+
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', message: 'Constructor API', security: 'native', multiTenant: true });
 });
