@@ -75,13 +75,20 @@ async function sendViaGmail({ to, subject, html, text }) {
     }
 
     try {
-        const info = await transporter.sendMail({
-            from: `"URA MARKET" <${process.env.EMAIL_USER}>`,
+        // Envolver en una promesa con timeout de 15 segundos
+        const sendPromise = transporter.sendMail({
+            from: `"URA MARKET" <${process.env.EMAIL_USER || 'fonsecakiran@gmail.com'}>`, // Asegurar remitente
             to: to,
             subject: subject,
             html: html,
             text: text
         });
+
+        const timeoutPromise = new Promise((_, reject) =>
+            setTimeout(() => reject(new Error('Tiempo de espera agotado al enviar email (Gmail)')), 15000)
+        );
+
+        const info = await Promise.race([sendPromise, timeoutPromise]);
 
         console.log(`✅ Email enviado por Gmail ID: ${info.messageId}`);
         return { success: true, id: info.messageId, provider: 'gmail' };
