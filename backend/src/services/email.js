@@ -60,11 +60,11 @@ async function sendViaNodemailer({ to, subject, html, text }) {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         host: 'smtp.gmail.com',
-        port: 465,
+        port: 465, // Volvemos a SSL directo, suele ser menos problemático si las credenciales están bien
         secure: true,
         auth: {
             user: process.env.EMAIL_USER || 'fonsecakiran@gmail.com',
-            pass: process.env.EMAIL_PASS || 'tclebejcfxkyodws'
+            pass: process.env.EMAIL_PASS || 'tclebejcfxkyodws' // App password
         }
     });
 

@@ -1,22 +1,15 @@
 /**
- * ZIP Processor Service (Robust Windows Version)
+ * ZIP Processor Service (Universal/Serverless Version)
  * Procesa archivos ZIP para carga masiva de productos
- * Usa PowerShell Expand-Archive para máxima compatibilidad en Windows
+ * Usa 'adm-zip' para compatibilidad total (Windows/Linux/Vercel)
  */
 
-import fs from 'fs';
-import fsp from 'fs/promises';
+import AdmZip from 'adm-zip';
 import path from 'path';
-import os from 'os';
-import { spawn } from 'child_process';
-import util from 'util';
-
-
 
 // Constantes
 const MAX_IMAGES = 100;
-const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB por imagen (aumentado)
-const MAX_ZIP_SIZE = 500 * 1024 * 1024; // 500 MB por ZIP (aumentado)
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB por imagen
 const ALLOWED_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp'];
 
 /**
@@ -57,143 +50,134 @@ export function extractCategoryFromPath(relativePath) {
 }
 
 /**
- * Recursively get all files in a directory
- */
-async function getFilesRecursively(dir) {
-    const dirents = await fsp.readdir(dir, { withFileTypes: true });
-    const files = await Promise.all(dirents.map((dirent) => {
-        const res = path.resolve(dir, dirent.name);
-        return dirent.isDirectory() ? getFilesRecursively(res) : res;
-    }));
-    return Array.prototype.concat(...files);
-}
-
-/**
- * Procesa un archivo ZIP usando PowerShell (Versión Stream/Spawn)
- * @param {string} filePath - Ruta absoluta del archivo ZIP
- * @returns {Promise<Object>} - Resultado del procesamiento
+ * Procesa un archivo ZIP desde la ruta de archivo (adm-zip es síncrono para archivos locales)
+ * Para serverless, es mejor usar processZipBuffer si es posible, pero mantenemos esta firma.
  */
 export async function processZipFile(filePath) {
-    const tempDir = await fsp.mkdtemp(path.join(os.tmpdir(), 'upload-'));
-    console.log(`📦 Extrayendo ZIP usando PowerShell en: ${tempDir}`);
+    console.log(`📦 Procesando ZIP con adm-zip: ${filePath}`);
 
     return new Promise((resolve, reject) => {
-        // Usar spawn para evitar límites de buffer de exec
-        const ps = spawn('powershell', [
-            '-Command',
-            `Expand-Archive -LiteralPath '${filePath}' -DestinationPath '${tempDir}' -Force`
-        ]);
+        try {
+            const zip = new AdmZip(filePath);
+            const zipEntries = zip.getEntries(); // Array de objetos ZipEntry
 
-        let stderrData = '';
+            console.log(`📂 Archivos encontrados (entradas ZIP): ${zipEntries.length}`);
 
-        ps.stderr.on('data', (data) => {
-            // Acumular solo los primeros 1KB de error para evitar logs gigantes
-            if (stderrData.length < 1024) {
-                stderrData += data.toString();
-            }
-        });
+            const products = [];
 
-        ps.on('close', async (code) => {
-            if (code !== 0) {
-                console.error(`❌ PowerShell exited with code ${code}`);
-                // Limpieza en caso de error
-                try { await fsp.rm(tempDir, { recursive: true, force: true }); } catch (e) { }
+            for (const entry of zipEntries) {
+                // Ignorar directorios y archivos basura
+                if (entry.isDirectory || entry.entryName.includes('__MACOSX') || entry.entryName.includes('.DS_Store')) {
+                    continue;
+                }
 
-                return reject(new Error(`Error al descomprimir (Código ${code}). ${stderrData.substring(0, 200)}...`));
-            }
+                const ext = path.extname(entry.name).toLowerCase();
+                if (!ALLOWED_EXTENSIONS.includes(ext)) continue;
 
-            try {
-                // Leer todos los archivos extraídos
-                const allFiles = await getFilesRecursively(tempDir);
-                console.log(`📂 Archivos encontrados: ${allFiles.length}`);
+                // Chequeo de tamaño antes de descomprimir en memoria
+                if (entry.header.size > MAX_FILE_SIZE) {
+                    console.warn(`⚠️ Imagen muy grande ignorada: ${entry.name}`);
+                    continue;
+                }
 
-                const products = [];
+                try {
+                    // Leer buffer de la imagen
+                    const fileBuffer = entry.getData();
+                    const base64 = fileBuffer.toString('base64');
+                    const mimeType = getMimeType(ext);
 
-                for (const fullPath of allFiles) {
-                    // Ignorar directorios __MACOSX ocultos
-                    if (fullPath.includes('__MACOSX') || fullPath.includes('.DS_Store')) continue;
+                    // El "entryName" incluye la ruta dentro del zip
+                    const relativePath = entry.entryName;
 
-                    const ext = path.extname(fullPath).toLowerCase();
-                    if (!ALLOWED_EXTENSIONS.includes(ext)) continue;
-
-                    try {
-                        const stats = await fsp.stat(fullPath);
-                        if (stats.size > MAX_FILE_SIZE) {
-                            console.warn(`⚠️ Imagen muy grande ignorada: ${path.basename(fullPath)}`);
-                            continue;
+                    products.push({
+                        name: fileNameToProductName(entry.name),
+                        category: extractCategoryFromPath(relativePath),
+                        image: {
+                            base64: `data:${mimeType};base64,${base64}`,
+                            fileName: entry.name,
+                            size: entry.header.size,
+                            mimeType: mimeType
                         }
+                    });
 
-                        // Leer imagen
-                        const fileBuffer = await fsp.readFile(fullPath);
-                        const base64 = fileBuffer.toString('base64');
-                        const mimeType = getMimeType(ext);
+                    if (products.length >= MAX_IMAGES) break;
 
-                        // Calcular path relativo para categoría
-                        const relativePath = path.relative(tempDir, fullPath);
-
-                        products.push({
-                            name: fileNameToProductName(path.basename(fullPath)),
-                            category: extractCategoryFromPath(relativePath),
-                            image: {
-                                base64: `data:${mimeType};base64,${base64}`,
-                                fileName: path.basename(fullPath),
-                                size: stats.size,
-                                mimeType: mimeType
-                            }
-                        });
-
-                        if (products.length >= MAX_IMAGES) break;
-
-                    } catch (err) {
-                        console.error(`❌ Error leyendo archivo ${fullPath}:`, err.message);
-                    }
+                } catch (err) {
+                    console.error(`❌ Error procesando entrada ${entry.name}:`, err.message);
                 }
-
-                // Limpieza antes de retornar
-                try { await fsp.rm(tempDir, { recursive: true, force: true }); } catch (e) { }
-
-                if (products.length === 0) {
-                    // Si no hay productos, pero el ZIP era válido, retornamos error controlado
-                    return reject(new Error('No se encontraron imágenes válidas en el ZIP.'));
-                }
-
-                console.log(`✅ Imágenes procesadas exitosamente: ${products.length}`);
-
-                resolve({
-                    success: true,
-                    totalImages: products.length,
-                    products
-                });
-
-            } catch (postProcessError) {
-                try { await fsp.rm(tempDir, { recursive: true, force: true }); } catch (e) { }
-                reject(postProcessError);
             }
-        });
 
-        ps.on('error', (err) => {
-            // Error al iniciar el proceso
-            console.error('❌ Error spawing PowerShell:', err);
-            reject(new Error('Falló al iniciar el proceso de descompresión via PowerShell.'));
-        });
+            if (products.length === 0) {
+                return reject(new Error('No se encontraron imágenes válidas en el ZIP.'));
+            }
+
+            console.log(`✅ Imágenes procesadas exitosamente: ${products.length}`);
+
+            resolve({
+                success: true,
+                totalImages: products.length,
+                products
+            });
+
+        } catch (error) {
+            console.error('❌ Error descomprimiendo ZIP:', error);
+            reject(new Error(`Error al leer ZIP: ${error.message}`));
+        }
     });
 }
 
 /**
- * Procesa un buffer de ZIP escribiéndolo primero a disco
- * (Compatibilidad con código existente)
+ * Procesa un buffer de ZIP directamente en memoria (Ideal para serverless)
  */
 export async function processZipBuffer(zipBuffer) {
-    const tempFilePath = path.join(os.tmpdir(), `temp_upload_${Date.now()}.zip`);
+    console.log(`📦 Procesando Bufffer ZIP en memoria...`);
 
-    try {
-        await fsp.writeFile(tempFilePath, zipBuffer);
-        return await processZipFile(tempFilePath);
-    } finally {
+    return new Promise((resolve, reject) => {
         try {
-            await fsp.unlink(tempFilePath);
-        } catch (e) { /* ignore */ }
-    }
+            const zip = new AdmZip(zipBuffer);
+            const zipEntries = zip.getEntries();
+            const products = [];
+
+            for (const entry of zipEntries) {
+                if (entry.isDirectory || entry.entryName.includes('__MACOSX') || entry.entryName.includes('.DS_Store')) continue;
+
+                const ext = path.extname(entry.name).toLowerCase();
+                if (!ALLOWED_EXTENSIONS.includes(ext)) continue;
+
+                if (entry.header.size > MAX_FILE_SIZE) continue;
+
+                const fileBuffer = entry.getData();
+                const base64 = fileBuffer.toString('base64');
+                const mimeType = getMimeType(ext);
+
+                products.push({
+                    name: fileNameToProductName(entry.name),
+                    category: extractCategoryFromPath(entry.entryName),
+                    image: {
+                        base64: `data:${mimeType};base64,${base64}`,
+                        fileName: entry.name,
+                        size: entry.header.size,
+                        mimeType: mimeType
+                    }
+                });
+
+                if (products.length >= MAX_IMAGES) break;
+            }
+
+            if (products.length === 0) {
+                return reject(new Error('No se encontraron imágenes válidas.'));
+            }
+
+            resolve({
+                success: true,
+                totalImages: products.length,
+                products
+            });
+
+        } catch (error) {
+            reject(new Error(`Error al procesar buffer ZIP: ${error.message}`));
+        }
+    });
 }
 
 /**
@@ -213,8 +197,5 @@ export default {
     fileNameToProductName,
     extractCategoryFromPath,
     validateZipBuffer,
-    MAX_IMAGES,
-    MAX_FILE_SIZE,
-    MAX_ZIP_SIZE,
-    ALLOWED_EXTENSIONS
+    MAX_IMAGES
 };

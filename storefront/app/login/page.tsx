@@ -26,12 +26,17 @@ export default function LoginPage() {
         setError('');
 
         try {
-            let apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://constructor-backend-i94k.onrender.com/api';
-            // Asegurar que termine en /api
-            if (!apiUrl.endsWith('/api')) {
-                apiUrl = `${apiUrl}/api`;
+            let apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+
+            // Limpieza robusta: Quitar todas las barras finales y asegurar /api
+            if (apiUrl) {
+                apiUrl = apiUrl.replace(/\/+$/, '');
+                if (!apiUrl.endsWith('/api')) {
+                    apiUrl = `${apiUrl}/api`;
+                }
+            } else {
+                apiUrl = '/api'; // Relative for Vercel
             }
-            if (apiUrl.endsWith('/api/api')) apiUrl = apiUrl.replace('/api/api', '/api');
 
             const res = await fetch(`${apiUrl}/auth/login`, {
                 method: 'POST',

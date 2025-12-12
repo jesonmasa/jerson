@@ -2,7 +2,22 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
 
-const API_URL = 'http://localhost:3001/api';
+// Detectar entorno para URL base
+const getApiUrl = () => {
+    // Si hay variable de entorno (Vite)
+    const envUrl = import.meta.env.VITE_API_URL;
+    if (envUrl) return envUrl;
+
+    // Si estamos en Vercel (mismo dominio), usar relativo
+    if (window.location.hostname !== 'localhost') {
+        return '/api';
+    }
+
+    // Fallback local
+    return 'http://localhost:3001/api';
+};
+
+const API_URL = getApiUrl();
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -64,8 +79,8 @@ const Login = () => {
                         {/* Error */}
                         {error && (
                             <div className={`mb-6 p-4 rounded-lg text-sm ${needsVerification
-                                    ? 'bg-yellow-50 border border-yellow-200 text-yellow-700'
-                                    : 'bg-red-50 border border-red-200 text-red-600'
+                                ? 'bg-yellow-50 border border-yellow-200 text-yellow-700'
+                                : 'bg-red-50 border border-red-200 text-red-600'
                                 }`}>
                                 {needsVerification && <span className="font-bold">📧 </span>}
                                 {error}

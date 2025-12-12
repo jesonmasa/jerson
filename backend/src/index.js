@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import path from 'path';
+import os from 'os'; // Importante para Vercel
 import { fileURLToPath } from 'url';
 import { securityLogger } from './security/validation.js';
 
@@ -119,7 +120,9 @@ app.use(securityHeaders);
 // Body parsing - Aumentado a 200mb para soportar ZIPs grandes en base64
 app.use(express.json({ limit: '200mb' }));
 app.use(express.urlencoded({ extended: true, limit: '200mb' }));
-app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+// Uploads: En Vercel no hay persistencia local, pero definimos ruta para compatibilidad
+// En producción real, los uploads van directo a Cloudinary
+app.use('/uploads', express.static(path.join(os.tmpdir(), 'uploads')));
 
 // Routes
 app.use('/api/products', productsRouter);
@@ -191,14 +194,20 @@ app.use((req, res) => {
   res.status(404).json({ error: 'Ruta no encontrada' });
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Backend: http://localhost:${PORT}`);
-  console.log(`🔒 Seguridad nativa activa`);
-  console.log('✅✅✅ SERVER FIXED KEY ACTIVE - RESTART SUCCESSFUL ✅✅✅');
-}).on('error', (err) => {
-  if (err.code === 'EADDRINUSE') {
-    console.error(`❌ Puerto ${PORT} en uso.`);
-  } else {
-    console.error('❌ Error:', err);
-  }
-});
+// Exportar app para Vercel
+export default app;
+
+// Solo escuchar si se ejecuta directamente (no importado por Vercel)
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`🚀 Backend: http://localhost:${PORT}`);
+    console.log(`🔒 Seguridad nativa activa`);
+    console.log('✅✅✅ SERVER FIXED KEY ACTIVE - RESTART SUCCESSFUL ✅✅✅');
+  }).on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.error(`❌ Puerto ${PORT} en uso.`);
+    } else {
+      console.error('❌ Error:', err);
+    }
+  });
+}

@@ -6,6 +6,7 @@
 import express from 'express';
 import fs from 'fs/promises';
 import path from 'path';
+import os from 'os'; // Importante para Vercel
 import { fileURLToPath } from 'url';
 import { processZipBuffer, validateZipBuffer } from '../services/zip-processor.js';
 import { uploadImage } from '../services/cloudinary.js';
@@ -70,7 +71,9 @@ async function uploadImageWithTimeout(imageBuffer, options) {
 const upload = multer({
     storage: multer.diskStorage({
         destination: function (req, file, cb) {
-            cb(null, path.join(__dirname, '../../uploads/temp'));
+            // Vercel y AWS Lambda solo permiten escritura en /tmp
+            const tempDir = os.tmpdir();
+            cb(null, tempDir);
         },
         filename: function (req, file, cb) {
             cb(null, `upload_${Date.now()}_${file.originalname}`);

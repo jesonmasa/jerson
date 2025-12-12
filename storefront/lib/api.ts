@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // Use empty string to default to relative path (uses Next.js rewrites)
 const API_URL = process.env.NEXT_PUBLIC_API_URL || '';
-console.log('🔌 API_URL initialized (Proxy Mode):', API_URL || '/api');
+console.log('🔌 API_URL initialized:', API_URL || '(Relative /api for Vercel)');
 
 export const api = axios.create({
     baseURL: `${API_URL}/api`,

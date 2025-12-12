@@ -22,16 +22,18 @@ export default function RegisterPage() {
         setError('');
 
         try {
-            let apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://constructor-backend-i94k.onrender.com/api';
-            // Asegurar que termine en /api
-            if (!apiUrl.endsWith('/api')) {
-                apiUrl = `${apiUrl}/api`;
-            }
-            // Si por error tiene termina en /api/api, corregirlo (edge case)
-            if (apiUrl.endsWith('/api/api')) {
-                apiUrl = apiUrl.substring(0, apiUrl.length - 4);
-            }
+            let apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+            // Si está vacío, usa path relativo para que el proxy de Vercel maneje la ruta
 
+            // Limpieza robusta: Quitar todas las barras finales y asegurar /api
+            if (apiUrl) {
+                apiUrl = apiUrl.replace(/\/+$/, '');
+                if (!apiUrl.endsWith('/api')) {
+                    apiUrl = `${apiUrl}/api`;
+                }
+            } else {
+                apiUrl = '/api'; // Relative
+            }
             const res = await fetch(`${apiUrl}/auth/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
