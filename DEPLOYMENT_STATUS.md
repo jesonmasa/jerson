@@ -54,35 +54,37 @@ Debería devolver: `{"status":"ok","message":"Constructor API"}`
 
 ---
 
-## 🎨 PASO 4: Admin Panel en Vercel (PENDIENTE ⏳)
+## 🎨 PASO 4: Admin Panel en Vercel (COMPLETADO ✅)
 
-### Pasos:
-1. Ve a https://vercel.com/new
-2. Importa el repositorio: `fonsecakiran/constructor-platform`
-3. **Root Directory**: `admin`
-4. **Framework Preset**: Vite
-5. **Variables de entorno**:
+### URL del Admin Panel
+- **URL Principal**: `https://jerson-admin.vercel.app`
+
+### Configuración:
+- **Project Name**: `jerson-admin`
+- **Root Directory**: `admin`
+- **Framework Preset**: Vite
+- **Variables de entorno**:
    ```
    VITE_API_URL = https://constructor-backend-gelt.onrender.com/api
    VITE_CLOUDINARY_CLOUD_NAME = dpksutdjn
    ```
-6. Deploy
 
 ---
 
-## 🛒 PASO 5: Storefront en Vercel (PENDIENTE ⏳)
+## 🛒 PASO 5: Storefront en Vercel (COMPLETADO ✅)
 
-### Pasos:
-1. Ve a https://vercel.com/new
-2. Importa el mismo repositorio: `fonsecakiran/constructor-platform`
-3. **Root Directory**: `storefront`
-4. **Framework Preset**: Next.js
-5. **Variables de entorno**:
+### URL del Storefront
+- **URL Principal**: `https://jerson-storefront.vercel.app`
+
+### Configuración:
+- **Project Name**: `jerson-storefront`
+- **Root Directory**: `storefront`
+- **Framework Preset**: Next.js
+- **Variables de entorno**:
    ```
    NEXT_PUBLIC_API_URL = https://constructor-backend-gelt.onrender.com/api
    NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME = dpksutdjn
    ```
-6. Deploy
 
 ---
 
