@@ -1,49 +1,47 @@
 /**
- * Servicio de Email usando Nodemailer (Gmail)
- * Envía correos reales para verificación y notificaciones.
+ * Servicio de Email usando Resend (Oficial)
+ * Envía correos transaccionales confiables.
  */
 
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
-// Configuración de Gmail
-const EMAIL_USER = process.env.EMAIL_USER;
-const EMAIL_PASS = process.env.EMAIL_PASS; // Contraseña de App (NO tu contraseña normal)
-const FROM_EMAIL = process.env.FROM_EMAIL || `"Constructor Platform" <${EMAIL_USER}>`;
+// API Key proporcionada por el usuario
+// Se usa la variable de entorno RESEND_API_KEY si existe, si no, usa la clave directa.
+const API_KEY = process.env.RESEND_API_KEY || 're_UfBFceES_HmrRAanQcwfjUDakFtCZMgwG';
+const FROM_EMAIL = 'onboarding@resend.dev'; // Email por defecto de Resend (funciona sin configurar dominio)
 
-// Crear el transportador (reusable)
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: EMAIL_USER,
-        pass: EMAIL_PASS
-    }
-});
+const resend = new Resend(API_KEY);
 
 /**
- * Enviar email genérico
+ * Enviar email genérico usando SDK de Resend
  */
 async function sendEmail({ to, subject, html, text }) {
-    if (!EMAIL_USER || !EMAIL_PASS) {
-        console.warn('⚠️ Credenciales de Email (EMAIL_USER / EMAIL_PASS) no configuradas en el servidor.');
-        console.log(`📧 [MOCK - NO SE ENVIÓ] Para: ${to} | Asunto: ${subject}`);
-        console.log(`   Contenido: ${text}`);
-        return { success: false, mock: true, error: 'Credenciales faltantes' };
+    if (!API_KEY) {
+        console.warn('⚠️ API Key de Resend no encontrada.');
+        return { success: false, error: 'No API Key' };
     }
 
     try {
-        const info = await transporter.sendMail({
+        console.log(`📤 Enviando email a ${to}...`);
+
+        const data = await resend.emails.send({
             from: FROM_EMAIL,
-            to,
-            subject,
-            html,
-            text
+            to: [to], // Resend espera un array
+            subject: subject,
+            html: html,
+            text: text
         });
 
-        console.log(`✅ Email enviado a ${to}: ${info.messageId}`);
-        return { success: true, id: info.messageId };
+        if (data.error) {
+            console.error('❌ Error Resend:', data.error);
+            return { success: false, error: data.error };
+        }
+
+        console.log(`✅ Email enviado exitosamente. ID: ${data.data?.id}`);
+        return { success: true, id: data.data?.id };
 
     } catch (error) {
-        console.error('❌ Error enviando email:', error);
+        console.error('❌ Error inesperado enviando email:', error);
         return { success: false, error: error.message };
     }
 }
