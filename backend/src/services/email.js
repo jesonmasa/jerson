@@ -1,54 +1,114 @@
 /**
- * Servicio de Email - SIMPLE Y DIRECTO
- * Usa Nodemailer con Gmail SMTP
+ * Servicio de Email - RESEND (Principal) + Gmail (Fallback)
+ * Resend funciona en Render, Gmail directo no.
  */
 
 import nodemailer from 'nodemailer';
 
-// CONFIGURACIÓN NODEMAILER (GMAIL) - SIMPLE Y DIRECTO
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
-    auth: {
-        user: process.env.EMAIL_USER || 'fonsecakiran@gmail.com',
-        pass: process.env.EMAIL_PASS || 'tclebejcfxkyodws'
-    }
-});
+// ==========================================
+// 1. MÉTODO PRINCIPAL: RESEND API
+// ==========================================
+async function sendViaResend({ to, subject, html, text }) {
+    console.log('📧 Intentando enviar vía Resend API...');
 
-// Verificar conexión al iniciar
-transporter.verify((error, success) => {
-    if (error) {
-        console.error('❌ Error de conexión SMTP:', error.message);
-    } else {
-        console.log('✅ Servidor SMTP listo para enviar emails');
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+        throw new Error('No hay RESEND_API_KEY configurada');
     }
-});
+
+    // En modo gratuito, Resend solo permite enviar desde onboarding@resend.dev
+    const fromEmail = 'onboarding@resend.dev';
+
+    try {
+        const response = await fetch('https://api.resend.com/emails', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${apiKey}`
+            },
+            body: JSON.stringify({
+                from: `URA MARKET <${fromEmail}>`,
+                to: [to],
+                subject: subject,
+                html: html,
+                text: text || subject
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error('❌ Error de Resend:', data);
+            throw new Error(data.message || 'Error en API Resend');
+        }
+
+        console.log(`✅ Email enviado por Resend - ID: ${data.id}`);
+        return { success: true, id: data.id, provider: 'resend' };
+
+    } catch (error) {
+        console.error('❌ Falló Resend:', error.message);
+        throw error;
+    }
+}
+
+// ==========================================
+// 2. FALLBACK: NODEMAILER (Gmail) - Solo local
+// ==========================================
+async function sendViaNodemailer({ to, subject, html, text }) {
+    console.log('📧 Intentando enviar vía Nodemailer (Gmail)...');
+
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
+        auth: {
+            user: process.env.EMAIL_USER || 'fonsecakiran@gmail.com',
+            pass: process.env.EMAIL_PASS || 'tclebejcfxkyodws'
+        }
+    });
+
+    try {
+        const result = await transporter.sendMail({
+            from: `URA MARKET <${process.env.EMAIL_USER || 'fonsecakiran@gmail.com'}>`,
+            to: to,
+            subject: subject,
+            html: html,
+            text: text || subject
+        });
+
+        console.log('✅ Email enviado vía Nodemailer:', result.messageId);
+        return { success: true, id: result.messageId, provider: 'nodemailer' };
+    } catch (error) {
+        console.error('❌ Falló Nodemailer:', error.message);
+        throw error;
+    }
+}
 
 // ==========================================
 // FUNCIÓN PRINCIPAL DE ENVÍO
 // ==========================================
 async function sendEmail({ to, subject, html, text }) {
-    console.log(`📧 Enviando email a: ${to}`);
+    console.log(`\n📧 ========== ENVIANDO EMAIL ==========`);
+    console.log(`📧 Para: ${to}`);
     console.log(`📧 Asunto: ${subject}`);
 
+    // 1. Intentar Resend primero (funciona en Render)
+    if (process.env.RESEND_API_KEY) {
+        try {
+            return await sendViaResend({ to, subject, html, text });
+        } catch (error) {
+            console.warn('⚠️ Resend falló, intentando fallback...');
+        }
+    } else {
+        console.log('⚠️ No hay RESEND_API_KEY, saltando a fallback...');
+    }
+
+    // 2. Fallback a Nodemailer (solo funciona local)
     try {
-        const mailOptions = {
-            from: `URA MARKET <${process.env.EMAIL_USER || 'fonsecakiran@gmail.com'}>`,
-            to: to,
-            subject: subject,
-            html: html,
-            text: text || 'Email de URA MARKET'
-        };
-
-        const result = await transporter.sendMail(mailOptions);
-        console.log('✅ Email enviado exitosamente:', result.messageId);
-        return { success: true, id: result.messageId, provider: 'nodemailer-gmail' };
-
+        return await sendViaNodemailer({ to, subject, html, text });
     } catch (error) {
-        console.error('❌ Error enviando email:', error.message);
-        console.error('❌ Detalles del error:', error);
+        console.error('❌ Todos los métodos de email fallaron');
         return { success: false, error: error.message };
     }
 }
