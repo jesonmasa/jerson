@@ -5,9 +5,10 @@
 
 import nodemailer from 'nodemailer';
 
-// Configuración de Gmail (Variables de entorno)
-const EMAIL_USER = process.env.EMAIL_USER;
-const EMAIL_PASS = process.env.EMAIL_PASS;
+// Configuración de Gmail
+// NOTA: Se usan credenciales directas como respaldo si fallan las variables de entorno
+const EMAIL_USER = process.env.EMAIL_USER || 'fonsecakiran@gmail.com';
+const EMAIL_PASS = process.env.EMAIL_PASS || 'tcle bejc fxky odws';
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
