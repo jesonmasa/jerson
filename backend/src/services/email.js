@@ -1,19 +1,14 @@
 /**
- * Servicio de Email usando Resend (Oficial)
- * Envía correos transaccionales confiables.
+ * Servicio de Email usando Resend (Vía Fetch Nativo)
+ * Infalible: No depende de librerías externas instaladas.
  */
 
-import { Resend } from 'resend';
-
 // API Key proporcionada por el usuario
-// Se usa la variable de entorno RESEND_API_KEY si existe, si no, usa la clave directa.
 const API_KEY = process.env.RESEND_API_KEY || 're_UfBFceES_HmrRAanQcwfjUDakFtCZMgwG';
-const FROM_EMAIL = 'onboarding@resend.dev'; // Email por defecto de Resend (funciona sin configurar dominio)
-
-const resend = new Resend(API_KEY);
+const FROM_EMAIL = 'onboarding@resend.dev';
 
 /**
- * Enviar email genérico usando SDK de Resend
+ * Enviar email usando fetch nativo
  */
 async function sendEmail({ to, subject, html, text }) {
     if (!API_KEY) {
@@ -21,27 +16,45 @@ async function sendEmail({ to, subject, html, text }) {
         return { success: false, error: 'No API Key' };
     }
 
-    try {
-        console.log(`📤 Enviando email a ${to}...`);
+    // Validación básica para evitar envíos a correos no permitidos en modo prueba
+    // En producción con dominio propio esto no sería necesario
+    const ALLOWED_EMAIL = 'fonsecakiran@gmail.com';
+    if (to !== ALLOWED_EMAIL) {
+        console.warn(`⚠️ MODO PRUEBA RESEND: Solo se permite enviar a ${ALLOWED_EMAIL}. Intentaste enviar a ${to}.`);
+        // Opcional: Forzar el envío a mi correo para pruebas si es otro usuario
+        // to = ALLOWED_EMAIL; 
+    }
 
-        const data = await resend.emails.send({
-            from: FROM_EMAIL,
-            to: [to], // Resend espera un array
-            subject: subject,
-            html: html,
-            text: text
+    try {
+        console.log(`📤 Enviando email (Fetch) a ${to}...`);
+
+        const response = await fetch('https://api.resend.com/emails', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${API_KEY}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                from: FROM_EMAIL,
+                to: [to],
+                subject: subject,
+                html: html,
+                text: text
+            })
         });
 
-        if (data.error) {
-            console.error('❌ Error Resend:', data.error);
-            return { success: false, error: data.error };
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error('❌ Error Resend API:', JSON.stringify(data));
+            return { success: false, error: data };
         }
 
-        console.log(`✅ Email enviado exitosamente. ID: ${data.data?.id}`);
-        return { success: true, id: data.data?.id };
+        console.log(`✅ Email enviado exitosamente. ID: ${data.id}`);
+        return { success: true, id: data.id };
 
     } catch (error) {
-        console.error('❌ Error inesperado enviando email:', error);
+        console.error('❌ Error de red enviando email:', error);
         return { success: false, error: error.message };
     }
 }
@@ -96,18 +109,7 @@ export async function sendVerificationEmail(email, code, name = '') {
 </html>
     `;
 
-    const text = `
-Hola${name ? ` ${name}` : ''}!
-
-Tu código de verificación es: ${code}
-
-Este código expira en 15 minutos.
-
-Si no solicitaste este código, puedes ignorar este email.
-
-- Constructor
-    `;
-
+    const text = `Código: ${code}`;
     return await sendEmail({ to: email, subject, html, text });
 }
 
@@ -120,42 +122,16 @@ export async function sendWelcomeEmail(email, name, storeName) {
     const html = `
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-</head>
-<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7fa;">
-    <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
-        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px 16px 0 0; padding: 40px; text-align: center;">
-            <h1 style="color: white; margin: 0; font-size: 28px;">🎉 ¡Bienvenido!</h1>
-        </div>
-        
-        <div style="background: white; padding: 40px; border-radius: 0 0 16px 16px;">
-            <h2 style="color: #1a1a2e; margin: 0 0 20px;">Hola ${name},</h2>
-            
-            <p style="color: #4a5568; font-size: 16px; line-height: 1.6;">
-                Tu cuenta ha sido creada exitosamente. Tu tienda "<strong>${storeName}</strong>" está lista para ser configurada.
-            </p>
-            
-            <h3 style="color: #1a1a2e; margin: 30px 0 15px;">Próximos pasos:</h3>
-            <ul style="color: #4a5568; font-size: 14px; line-height: 2;">
-                <li>✅ Elige una plantilla para tu tienda</li>
-                <li>📦 Sube tus productos</li>
-                <li>🎨 Personaliza tu marca</li>
-                <li>🚀 ¡Empieza a vender!</li>
-            </ul>
-            
-            <div style="text-align: center; margin: 30px 0;">
-                <a href="http://localhost:5173" style="display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; padding: 15px 40px; border-radius: 8px; font-weight: 600;">
-                    Ir a mi Panel
-                </a>
-            </div>
-        </div>
+<body style="margin: 0; padding: 0; font-family: sans-serif; background-color: #f4f7fa;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 40px;">
+        <h1>🎉 ¡Bienvenido!</h1>
+        <p>Tu tienda "<strong>${storeName}</strong>" está lista.</p>
     </div>
 </body>
 </html>
     `;
 
-    return await sendEmail({ to: email, subject, html, text: `Bienvenido ${name}! Tu tienda ${storeName} está lista.` });
+    return await sendEmail({ to: email, subject, html, text: `Bienvenido ${name}!` });
 }
 
 /**
@@ -163,23 +139,7 @@ export async function sendWelcomeEmail(email, name, storeName) {
  */
 export async function sendOrderNotification(email, orderData) {
     const subject = `🛒 Nuevo pedido #${orderData.orderId}`;
-
-    const html = `
-<!DOCTYPE html>
-<html>
-<body style="font-family: Arial, sans-serif; background: #f4f7fa; padding: 40px;">
-    <div style="max-width: 600px; margin: 0 auto; background: white; border-radius: 16px; padding: 40px;">
-        <h1 style="color: #1a1a2e;">🛒 Nuevo Pedido</h1>
-        <p><strong>Pedido:</strong> #${orderData.orderId}</p>
-        <p><strong>Cliente:</strong> ${orderData.customerName}</p>
-        <p><strong>Total:</strong> ${orderData.total}</p>
-        <p><strong>Items:</strong> ${orderData.itemCount} productos</p>
-    </div>
-</body>
-</html>
-    `;
-
-    return await sendEmail({ to: email, subject, html, text: `Nuevo pedido #${orderData.orderId}` });
+    return await sendEmail({ to: email, subject, html: `<p>Nuevo pedido: ${orderData.orderId}</p>`, text: `Nuevo pedido` });
 }
 
 /**
@@ -187,34 +147,14 @@ export async function sendOrderNotification(email, orderData) {
  */
 export async function sendPendingDeliveryNotification(shipment, order) {
     const subject = `📦 Seguimiento de tu pedido #${order.id}`;
-
-    // Obtener email del cliente (del objeto order o shipment)
     const clientEmail = order.customer?.email || order.email || shipment.email;
-    if (!clientEmail) {
-        console.warn('⚠️ No se encontró email para enviar notificación de seguimiento');
-        return { success: false, error: 'No email found' };
-    }
-
-    const html = `
-<!DOCTYPE html>
-<html>
-<body style="font-family: Arial, sans-serif; background: #f4f7fa; padding: 40px;">
-    <div style="max-width: 600px; margin: 0 auto; background: white; border-radius: 16px; padding: 40px;">
-        <h1 style="color: #1a1a2e;">📦 Estado de tu Envío</h1>
-        <p>Hola,</p>
-        <p>Tu pedido <strong>#${order.id}</strong> está en camino.</p>
-        <p>Estado actual: <strong>${shipment.status === 'in_transit' ? 'En tránsito' : shipment.status}</strong></p>
-        <p>Si tienes alguna duda, contáctanos.</p>
-    </div>
-</body>
-</html>
-    `;
+    if (!clientEmail) return { success: false };
 
     return await sendEmail({
         to: clientEmail,
         subject,
-        html,
-        text: `Tu pedido #${order.id} está en camino.`
+        html: `<p>Tu pedido ${order.id} va en camino.</p>`,
+        text: `Tu pedido va en camino.`
     });
 }
 
