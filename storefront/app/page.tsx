@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { getMarketplaceProducts, getMarketplaceStores } from '../lib/api';
@@ -27,7 +27,7 @@ interface Product {
     freeShipping?: boolean;
 }
 
-export default function MarketplaceHome() {
+function MarketplaceContent() {
     const [products, setProducts] = useState<Product[]>([]);
     const [flashDeals, setFlashDeals] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
@@ -161,7 +161,7 @@ export default function MarketplaceHome() {
     const topDiscountProduct = useMemo(() => {
         const productsWithDiscount = products.filter(p => p.discount && p.discount > 0);
         if (productsWithDiscount.length === 0) return null;
-        return productsWithDiscount.reduce((max, p) => 
+        return productsWithDiscount.reduce((max, p) =>
             (p.discount || 0) > (max.discount || 0) ? p : max
         );
     }, [products]);
@@ -407,3 +407,12 @@ export default function MarketplaceHome() {
         </div>
     );
 }
+
+export default function MarketplaceHome() {
+    return (
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Cargando...</div>}>
+            <MarketplaceContent />
+        </Suspense>
+    );
+}
+
