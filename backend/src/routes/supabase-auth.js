@@ -18,6 +18,9 @@ const REDIRECT_URL = process.env.FRONTEND_URL || 'https://jerson-storefront.verc
 // ============================================
 // REGISTRO - Con verificación de email de Supabase
 // ============================================
+// ============================================
+// REGISTRO - Con verificación de email de Supabase
+// ============================================
 router.post('/register', async (req, res) => {
     try {
         const { email, password, name } = req.body;
@@ -33,21 +36,16 @@ router.post('/register', async (req, res) => {
             return res.status(400).json({ error: 'La contraseña debe tener al menos 6 caracteres' });
         }
 
-        // GENERACIÓN DE CÓDIGO PROPIO (6 DÍGITOS)
-        const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
-
-        // Registrar con Supabase Auth (Sin auto-confirmación si es posible, o manejando nuestra propia flag)
-        // Nota: Supabase puede enviar su propio email. Lo ideal es desactivarlo en el dashboard o ignorarlo.
-        // Aquí registramos el usuario y guardamos nuestro código en 'user_metadata' o en nuestra tabla.
-
+        // Registrar con Supabase Auth
+        // Supabase enviará automáticamente el email de confirmación si está configurado en el Dashboard.
         const { data, error } = await supabase.auth.signUp({
             email,
             password,
             options: {
+                emailRedirectTo: `${REDIRECT_URL}/auth/callback`, // Importante: URL donde regresa el usuario
                 data: {
                     name: name,
-                    role: email === 'masajerson@gmail.com' ? 'super_admin' : 'owner',
-                    custom_code: verificationCode // Guardar código para verificar después
+                    role: email === 'masajerson@gmail.com' ? 'super_admin' : 'owner'
                 }
             }
         });
@@ -58,17 +56,7 @@ router.post('/register', async (req, res) => {
             return res.status(400).json({ error: error.message });
         }
 
-        // ENVIAR NUESTRO EMAIL CON EL CÓDIGO
-        try {
-            const { sendVerificationEmail } = await import('../services/email.js');
-            await sendVerificationEmail(email, verificationCode, name);
-            console.log(`✉️ Email personalizado enviado a ${email} con código ${verificationCode}`);
-        } catch (mailError) {
-            console.error('❌ Error enviando email visual:', mailError);
-            // No fallamos el registro, pero avisamos en logs
-        }
-
-        // Crear registro en nuestra tabla
+        // Crear registro en nuestra tabla local para redundancia/datos extra
         if (data.user) {
             try {
                 await platform.createUser({
@@ -78,7 +66,6 @@ router.post('/register', async (req, res) => {
                     role: email === 'masajerson@gmail.com' ? 'super_admin' : 'owner',
                     emailVerified: false,
                     supabaseAuthId: data.user.id,
-                    verificationCode: verificationCode, // Guardar también aquí por si acaso
                     password: 'managed_by_supabase_auth'
                 });
             } catch (dbError) {
@@ -88,8 +75,8 @@ router.post('/register', async (req, res) => {
 
         res.status(201).json({
             success: true,
-            message: 'Registro iniciado. Verifique con código.',
-            requireCode: true
+            message: 'Registro iniciado. Por favor revisa tu email para confirmar.',
+            requireCode: false
         });
 
     } catch (error) {
