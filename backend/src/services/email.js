@@ -1,61 +1,51 @@
 /**
- * Servicio de Email usando Resend
- * https://resend.com - 3,000 emails/mes gratis
+ * Servicio de Email usando Nodemailer (Gmail)
+ * Envía correos reales para verificación y notificaciones.
  */
 
-import https from 'https';
+import nodemailer from 'nodemailer';
 
-const RESEND_API_KEY = process.env.RESEND_API_KEY || '';
-const FROM_EMAIL = process.env.FROM_EMAIL || 'Constructor <noreply@constructor.app>';
+// Configuración de Gmail
+const EMAIL_USER = process.env.EMAIL_USER;
+const EMAIL_PASS = process.env.EMAIL_PASS; // Contraseña de App (NO tu contraseña normal)
+const FROM_EMAIL = process.env.FROM_EMAIL || `"Constructor Platform" <${EMAIL_USER}>`;
+
+// Crear el transportador (reusable)
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: EMAIL_USER,
+        pass: EMAIL_PASS
+    }
+});
 
 /**
- * Enviar email usando la API de Resend
+ * Enviar email genérico
  */
 async function sendEmail({ to, subject, html, text }) {
-    if (!RESEND_API_KEY) {
-        console.warn('⚠️ RESEND_API_KEY no configurada. Email no enviado.');
-        console.log(`📧 [MOCK] Email para ${to}: ${subject}`);
-        return { success: true, mock: true };
+    if (!EMAIL_USER || !EMAIL_PASS) {
+        console.warn('⚠️ Credenciales de Email (EMAIL_USER / EMAIL_PASS) no configuradas en el servidor.');
+        console.log(`📧 [MOCK - NO SE ENVIÓ] Para: ${to} | Asunto: ${subject}`);
+        console.log(`   Contenido: ${text}`);
+        return { success: false, mock: true, error: 'Credenciales faltantes' };
     }
 
-    return new Promise((resolve, reject) => {
-        const data = JSON.stringify({
+    try {
+        const info = await transporter.sendMail({
             from: FROM_EMAIL,
-            to: [to],
+            to,
             subject,
             html,
             text
         });
 
-        const options = {
-            hostname: 'api.resend.com',
-            port: 443,
-            path: '/emails',
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${RESEND_API_KEY}`,
-                'Content-Type': 'application/json',
-                'Content-Length': Buffer.byteLength(data)
-            }
-        };
+        console.log(`✅ Email enviado a ${to}: ${info.messageId}`);
+        return { success: true, id: info.messageId };
 
-        const req = https.request(options, (res) => {
-            let body = '';
-            res.on('data', chunk => body += chunk);
-            res.on('end', () => {
-                if (res.statusCode >= 200 && res.statusCode < 300) {
-                    resolve({ success: true, data: JSON.parse(body) });
-                } else {
-                    console.error('Email error:', body);
-                    reject(new Error(`Email failed: ${res.statusCode}`));
-                }
-            });
-        });
-
-        req.on('error', reject);
-        req.write(data);
-        req.end();
-    });
+    } catch (error) {
+        console.error('❌ Error enviando email:', error);
+        return { success: false, error: error.message };
+    }
 }
 
 /**
