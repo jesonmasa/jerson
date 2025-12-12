@@ -11,7 +11,8 @@ import { createClient } from '@supabase/supabase-js'
 // Get Supabase credentials from environment variables
 // Supports both SUPABASE_KEY and SUPABASE_ANON_KEY for flexibility
 const supabaseUrl = process.env.SUPABASE_URL || 'https://bmiuogfvzycwsfkbphpg.supabase.co'
-const supabaseAnonKey = process.env.SUPABASE_KEY || process.env.SUPABASE_ANON_KEY
+// HARDCODED FALLBACK PARA CORREGIR ERROR DE CONEXIÓN EN RENDER
+const supabaseAnonKey = process.env.SUPABASE_KEY || process.env.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJtaXVvZ2Z2enljd3Nma2JwaHBnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0ODkwOTMsImV4cCI6MjA4MTA2NTA5M30.ZoUOuiEzKTykL418jpsUlFTrVTv515Fnam0FS-l795g'
 
 // Validate environment variables
 if (!supabaseAnonKey) {
