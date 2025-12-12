@@ -23,7 +23,8 @@ export default function RegisterPage() {
         setError('');
 
         try {
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+            // FALLBACK FORZADO A PRODUCCIÓN PARA EVITAR ERROR DE CONEXIÓN
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://constructor-backend-gelt.onrender.com/api';
             const res = await fetch(`${apiUrl}/auth/register/init`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -53,7 +54,8 @@ export default function RegisterPage() {
         setError('');
 
         try {
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+            // FALLBACK FORZADO A PRODUCCIÓN
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://constructor-backend-gelt.onrender.com/api';
             const res = await fetch(`${apiUrl}/auth/register/verify`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
