@@ -1,6 +1,6 @@
 /**
- * Servicio de Email - RESEND (Principal) + Gmail (Fallback)
- * Resend funciona en Render, Gmail directo no.
+ * Servicio de Email - Soporte para Resend y Gmail (Nodemailer)
+ * Compatible con Vercel y entornos Serverless
  */
 
 import nodemailer from 'nodemailer';
@@ -52,7 +52,7 @@ async function sendViaResend({ to, subject, html, text }) {
 }
 
 // ==========================================
-// 2. FALLBACK: NODEMAILER (Gmail) - Solo local
+// 2. MÉTODO: NODEMAILER (Gmail)
 // ==========================================
 async function sendViaNodemailer({ to, subject, html, text }) {
     console.log('📧 Intentando enviar vía Nodemailer (Gmail)...');
@@ -93,24 +93,27 @@ async function sendEmail({ to, subject, html, text }) {
     console.log(`📧 Para: ${to}`);
     console.log(`📧 Asunto: ${subject}`);
 
-    // 1. Intentar Resend primero (funciona en Render)
+    // 1. Intentar Resend primero (si está configurado)
     if (process.env.RESEND_API_KEY) {
         try {
             return await sendViaResend({ to, subject, html, text });
         } catch (error) {
-            console.warn('⚠️ Resend falló, intentando fallback...');
+            console.warn('⚠️ Resend falló, intentando fallback a Gmail...');
         }
-    } else {
-        console.log('⚠️ No hay RESEND_API_KEY, saltando a fallback...');
     }
 
-    // 2. Fallback a Nodemailer (solo funciona local)
-    try {
-        return await sendViaNodemailer({ to, subject, html, text });
-    } catch (error) {
-        console.error('❌ Todos los métodos de email fallaron');
-        return { success: false, error: error.message };
+    // 2. Usar Nodemailer (Gmail) - Funciona en Vercel si las credenciales son correctas
+    if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+        try {
+            return await sendViaNodemailer({ to, subject, html, text });
+        } catch (error) {
+            console.error('❌ Falló Nodemailer:', error.message);
+            return { success: false, error: error.message };
+        }
     }
+
+    console.error('❌ No hay credenciales de email configuradas (Ni Resend ni Gmail)');
+    return { success: false, error: 'Configuración de email faltante' };
 }
 
 // ==========================================
