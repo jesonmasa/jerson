@@ -126,14 +126,7 @@ const nextConfig = {
     },
     reactStrictMode: true,
     swcMinify: true,
-    async rewrites() {
-        return [
-            {
-                source: '/api/:path*',
-                destination: 'https://jerson-backend.vercel.app/api/:path*',
-            },
-        ];
-    },
+    // rewrites removed to use same-domain API
 }
 
 module.exports = withPWA(nextConfig)
