@@ -17,19 +17,19 @@ export const platform = {
     console.log('✅ Supabase platform initialized')
     // AUTO-INIT SUPER ADMIN (Solo en desarrollo)
     console.log('🔍 NODE_ENV:', process.env.NODE_ENV)
-    
+
     // Check if we need to create super admin
     const { data: users, error } = await supabase
       .from('users')
       .select('*', { count: 'exact' })
-    
+
     console.log('🔍 Current users count:', users?.length || 0)
-    
+
     // Solo crear super admin si no existen usuarios y estamos en desarrollo
     if ((!users || users.length === 0) && process.env.NODE_ENV === 'development') {
       const superAdminEmail = process.env.SUPER_ADMIN_EMAIL || 'admin@constructor.test'
       const superAdminPassword = process.env.SUPER_ADMIN_PASSWORD || 'constructor123'
-      
+
       console.log('👑 Creando Super Admin para desarrollo...')
       const hashedPassword = await bcrypt.hash(superAdminPassword, 12)
       const tenantId = uuidv4()
@@ -74,12 +74,12 @@ export const platform = {
       .select('*')
       .eq('email', email.toLowerCase())
       .maybeSingle()
-    
+
     if (error) {
       console.error('Error finding user by email:', error)
       return null
     }
-    
+
     return data
   },
 
@@ -89,12 +89,12 @@ export const platform = {
       .select('*')
       .eq('id', id)
       .maybeSingle()
-    
+
     if (error) {
       console.error('Error finding user by id:', error)
       return null
     }
-    
+
     return data
   },
 
@@ -111,7 +111,10 @@ export const platform = {
         password: userData.password, // Already hashed
         name: userData.name,
         role: userData.role || 'owner',
-        email_verified: false,
+        email_verified: userData.emailVerified || false,
+        provider: userData.provider || null,
+        provider_id: userData.providerId || null,
+        avatar_url: userData.avatarUrl || null,
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString()
       })
@@ -155,7 +158,7 @@ export const platform = {
     const { data, error } = await supabase
       .from('users')
       .select('id, tenant_id, email, name, role, email_verified, created_at')
-    
+
     if (error) {
       console.error('Error getting all users:', error)
       return []
@@ -258,12 +261,12 @@ export const platform = {
       .eq('user_id', userId)
       .eq('status', 'active')
       .maybeSingle()
-    
+
     if (error) {
       console.error('Error getting subscription:', error)
       return null
     }
-    
+
     return data
   },
 
@@ -274,12 +277,12 @@ export const platform = {
       .eq('id', subscriptionId)
       .select()
       .single()
-    
+
     if (error) {
       console.error('Error updating subscription:', error)
       return null
     }
-    
+
     return data
   },
 
@@ -287,12 +290,12 @@ export const platform = {
     const { data, error } = await supabase
       .from('subscriptions')
       .select('*')
-    
+
     if (error) {
       console.error('Error getting all subscriptions:', error)
       return []
     }
-    
+
     return data
   },
 
@@ -301,29 +304,29 @@ export const platform = {
     const { count: totalUsers, error: userCountError } = await supabase
       .from('users')
       .select('*', { count: 'exact', head: true })
-    
+
     const { count: verifiedUsers, error: verifiedCountError } = await supabase
       .from('users')
       .select('*', { count: 'exact', head: true })
       .eq('email_verified', true)
-    
+
     // Get subscription counts
     const { count: activeSubscriptions, error: subCountError } = await supabase
       .from('subscriptions')
       .select('*', { count: 'exact', head: true })
       .eq('status', 'active')
-    
+
     // Calculate revenue
     const { data: subscriptions, error: revenueError } = await supabase
       .from('subscriptions')
       .select('price_monthly')
       .eq('status', 'active')
-    
+
     let monthlyRevenue = 0
     if (subscriptions) {
       monthlyRevenue = subscriptions.reduce((sum, sub) => sum + (sub.price_monthly || 0), 0)
     }
-    
+
     return {
       total_tenants: totalUsers || 0,
       active_subscriptions: activeSubscriptions || 0,
@@ -374,7 +377,7 @@ export const tenant = {
       .select('id')
       .eq('id', tenantId)
       .maybeSingle()
-    
+
     return !!data
   },
 
@@ -385,12 +388,12 @@ export const tenant = {
       .select('*')
       .eq('id', tenantId)
       .maybeSingle()
-    
+
     if (error) {
       console.error('Error getting tenant config:', error)
       return null
     }
-    
+
     return data
   },
 
@@ -404,12 +407,12 @@ export const tenant = {
       .eq('id', tenantId)
       .select()
       .single()
-    
+
     if (error) {
       console.error('Error updating tenant config:', error)
       return null
     }
-    
+
     return data
   },
 
@@ -420,12 +423,12 @@ export const tenant = {
       .from(collection)
       .select('*')
       .eq('tenant_id', tenantId)
-    
+
     if (error) {
       console.error(`Error finding all ${collection}:`, error)
       return []
     }
-    
+
     return data
   },
 
@@ -436,12 +439,12 @@ export const tenant = {
       .eq('tenant_id', tenantId)
       .eq('id', id)
       .maybeSingle()
-    
+
     if (error) {
       console.error(`Error finding ${collection} by id:`, error)
       return null
     }
-    
+
     return data
   },
 
@@ -450,19 +453,19 @@ export const tenant = {
       .from(collection)
       .select('*')
       .eq('tenant_id', tenantId)
-    
+
     // Apply conditions
     for (const [key, value] of Object.entries(condition)) {
       query = query.eq(key, value)
     }
-    
+
     const { data, error } = await query.maybeSingle()
-    
+
     if (error) {
       console.error(`Error finding one ${collection}:`, error)
       return null
     }
-    
+
     return data
   },
 
@@ -531,12 +534,12 @@ export const tenant = {
       .select('*')
       .eq('tenant_id', tenantId)
       .maybeSingle()
-    
+
     if (error) {
       console.error('Error getting analytics:', error)
       return null
     }
-    
+
     // Return default analytics if not found
     return data || {
       total_sales: 0,
@@ -549,7 +552,7 @@ export const tenant = {
   async updateAnalytics(tenantId, updates) {
     // First try to get existing analytics
     const existing = await this.getAnalytics(tenantId)
-    
+
     if (existing && existing.id) {
       // Update existing
       const { data, error } = await supabase
@@ -562,12 +565,12 @@ export const tenant = {
         .eq('id', existing.id)
         .select()
         .single()
-      
+
       if (error) {
         console.error('Error updating analytics:', error)
         return null
       }
-      
+
       return data
     } else {
       // Create new
@@ -586,19 +589,19 @@ export const tenant = {
         })
         .select()
         .single()
-      
+
       if (error) {
         console.error('Error creating analytics:', error)
         return null
       }
-      
+
       return data
     }
   },
 
   async recordSale(tenantId, orderData) {
     const analytics = await this.getAnalytics(tenantId)
-    
+
     // Update analytics
     const updatedAnalytics = {
       total_sales: (analytics?.total_sales || 0) + (orderData.total || 0),
@@ -638,7 +641,7 @@ export const aggregation = {
     const { data: users, error: usersError } = await supabase
       .from('users')
       .select('id, tenant_id, name')
-    
+
     if (usersError) {
       console.error('Error getting users for global stats:', usersError)
       return {}
@@ -659,13 +662,13 @@ export const aggregation = {
           .from('products')
           .select('*')
           .eq('tenant_id', user.tenant_id)
-        
+
         // Get orders
         const { data: orders, error: ordersError } = await supabase
           .from('orders')
           .select('*')
           .eq('tenant_id', user.tenant_id)
-        
+
         // Get analytics
         const { data: analytics, error: analyticsError } = await supabase
           .from('analytics')
@@ -675,7 +678,7 @@ export const aggregation = {
 
         if (products) {
           totalProducts += products.length
-          
+
           // Group by category
           for (const product of products) {
             const cat = product.category || 'Sin categoría'
@@ -689,7 +692,7 @@ export const aggregation = {
 
         if (analytics) {
           totalRevenue += analytics.total_sales || 0
-          
+
           // Top selling products
           for (const sold of analytics.products_sold || []) {
             topProducts.push({
@@ -712,13 +715,13 @@ export const aggregation = {
       .from('subscriptions')
       .select('*', { count: 'exact', head: true })
       .eq('status', 'active')
-    
+
     // Calculate MRR
     const { data: subscriptions, error: mrrError } = await supabase
       .from('subscriptions')
       .select('price_monthly')
       .eq('status', 'active')
-    
+
     let monthlyRecurringRevenue = 0
     if (subscriptions) {
       monthlyRecurringRevenue = subscriptions.reduce((sum, sub) => sum + (sub.price_monthly || 0), 0)
@@ -758,7 +761,7 @@ export const aggregation = {
     const { data: users, error: usersError } = await supabase
       .from('users')
       .select('id, tenant_id, name')
-    
+
     if (usersError) {
       console.error('Error getting users for marketplace:', usersError)
       return []
@@ -776,7 +779,7 @@ export const aggregation = {
           .select('store_name')
           .eq('id', user.tenant_id)
           .maybeSingle()
-        
+
         const storeName = config?.store_name || user.name + "'s Store"
 
         // Get published products
@@ -809,7 +812,7 @@ export const aggregation = {
     const { data: users, error: usersError } = await supabase
       .from('users')
       .select('id, tenant_id, name')
-    
+
     if (usersError) {
       console.error('Error getting users for stores:', usersError)
       return []
@@ -826,7 +829,7 @@ export const aggregation = {
           .select('store_name, logo_url, is_published')
           .eq('id', user.tenant_id)
           .maybeSingle()
-        
+
         // Filter: Only show published stores
         if (config && config.is_published === false) continue
 
@@ -843,11 +846,11 @@ export const aggregation = {
           logo: config?.logo_url || '',
           product_count: productCount || 0
         })
-      } catch (error) { 
+      } catch (error) {
         console.warn(`⚠️ Error procesando tienda ${user.tenant_id}:`, error.message)
       }
     }
-    
+
     return stores
   },
 
@@ -856,7 +859,7 @@ export const aggregation = {
     const { data: users, error: usersError } = await supabase
       .from('users')
       .select('id, tenant_id, name')
-    
+
     if (usersError) {
       console.error('Error getting users for flash deals:', usersError)
       return []
@@ -874,7 +877,7 @@ export const aggregation = {
           .select('store_name')
           .eq('id', user.tenant_id)
           .maybeSingle()
-        
+
         const storeName = config?.store_name || user.name + "'s Store"
 
         // Get discounted products
@@ -888,7 +891,7 @@ export const aggregation = {
         // Sort by discount
         if (products) {
           const sorted = products.sort((a, b) => b.discount - a.discount)
-          
+
           // Take the best deal
           if (sorted.length > 0) {
             const bestDeal = sorted[0]

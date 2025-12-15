@@ -49,7 +49,8 @@ export default function CartPage() {
                 gender: formData.gender
             };
 
-            const response = await fetch('http://localhost:3001/api/orders', {
+            const API_URL = process.env.NEXT_PUBLIC_API_URL || '';
+            const response = await fetch(`${API_URL}/orders`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(orderData),

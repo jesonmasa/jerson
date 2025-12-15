@@ -63,8 +63,8 @@ async function sendViaNodemailer({ to, subject, html, text }) {
         port: 465, // Volvemos a SSL directo, suele ser menos problemático si las credenciales están bien
         secure: true,
         auth: {
-            user: process.env.EMAIL_USER || 'fonsecakiran@gmail.com',
-            pass: process.env.EMAIL_PASS || 'tclebejcfxkyodws' // App password
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS
         }
     });
 

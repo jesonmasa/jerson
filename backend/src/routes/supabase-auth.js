@@ -9,11 +9,19 @@
 import express from 'express';
 import { supabase } from '../database/supabaseClient.js';
 import { platform } from '../database/db.js';
+import { sendVerificationEmail } from '../services/email.js';
 
 const router = express.Router();
 
 // URL de redirección después de verificar email
-const REDIRECT_URL = process.env.FRONTEND_URL || 'https://jerson-storefront.vercel.app';
+// URL de redirección dinámica (Soporta Vercel Preview y Producción)
+const getRedirectUrl = () => {
+    if (process.env.FRONTEND_URL) return process.env.FRONTEND_URL;
+    if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+    return 'http://localhost:3000'; // Fallback solo si no hay variables
+};
+
+const REDIRECT_URL = getRedirectUrl();
 
 // ============================================
 // REGISTRO - Con verificación de email de Supabase
@@ -36,16 +44,14 @@ router.post('/register', async (req, res) => {
             return res.status(400).json({ error: 'La contraseña debe tener al menos 6 caracteres' });
         }
 
-        // Registrar con Supabase Auth
-        // Supabase enviará automáticamente el email de confirmación si está configurado en el Dashboard.
+        // 1. Crear usuario en Supabase (sin confirmar email aún)
         const { data, error } = await supabase.auth.signUp({
             email,
             password,
             options: {
-                emailRedirectTo: `${REDIRECT_URL}/auth/callback`, // Importante: URL donde regresa el usuario
                 data: {
                     name: name,
-                    role: email === 'masajerson@gmail.com' ? 'super_admin' : 'owner'
+                    role: email === process.env.SUPER_ADMIN_EMAIL ? 'super_admin' : 'owner',
                 }
             }
         });
@@ -56,27 +62,45 @@ router.post('/register', async (req, res) => {
             return res.status(400).json({ error: error.message });
         }
 
-        // Crear registro en nuestra tabla local para redundancia/datos extra
+        // 2. Generar código de verificación local (ya que usamos SMTP propio)
+        let verificationCode = null;
         if (data.user) {
+            // Guardar usuario en DB local
             try {
+                // Crear usuario
                 await platform.createUser({
                     id: data.user.id,
                     email: email,
                     name: name,
-                    role: email === 'masajerson@gmail.com' ? 'super_admin' : 'owner',
+                    role: email === process.env.SUPER_ADMIN_EMAIL ? 'super_admin' : 'owner',,
                     emailVerified: false,
                     supabaseAuthId: data.user.id,
-                    password: 'managed_by_supabase_auth'
+                    password: 'managed_by_supabase_auth' // No guardamos pass real
                 });
+
+                // Generar código
+                verificationCode = await platform.createVerificationCode(email);
+                console.log(`🔢 Código generado para ${email}: ${verificationCode}`);
+
+                // Enviar email usando nuestras credenciales (Nodemailer)
+                try {
+                    await sendVerificationEmail(email, verificationCode, name);
+                    console.log('✅ Email enviado correctamente');
+                } catch (emailErr) {
+                    console.error('❌ Error enviando email:', emailErr);
+                    // No fallamos el registro, pero el usuario no recibirá el código
+                }
+
             } catch (dbError) {
-                console.warn('⚠️ Error creando en DB local:', dbError.message);
+                console.warn('⚠️ Error operación DB local:', dbError.message);
             }
         }
 
         res.status(201).json({
             success: true,
-            message: 'Registro iniciado. Por favor revisa tu email para confirmar.',
-            requireCode: false
+            message: 'Registro exitoso.',
+            requireCode: true, // Frontend debe pedir código
+            email: email
         });
 
     } catch (error) {
@@ -370,6 +394,81 @@ router.post('/login', async (req, res) => {
         } catch (error) {
             console.error('❌ Error en resend-verification:', error);
             res.status(500).json({ error: 'Error al reenviar email' });
+        }
+    });
+
+    // ============================================
+    // CALLBACK DE GOOGLE (NextAuth sync)
+    // ============================================
+    router.post('/google-callback', async (req, res) => {
+        try {
+            const { email, name, image, providerId } = req.body;
+
+            console.log('🌐 Sincronizando usuario de Google:', email);
+
+            if (!email) {
+                return res.status(400).json({ error: 'Email requerido' });
+            }
+
+            // 1. Buscar si ya existe
+            let user = await platform.findUserByEmail(email);
+
+            if (user) {
+                // Si existe, actualizar si faltan datos de proveedor
+                if (!user.provider) {
+                    await platform.updateUser(user.id, {
+                        provider: 'google',
+                        provider_id: providerId,
+                        avatar_url: image,
+                        emailVerified: true // Google emails are verified
+                    });
+                }
+
+                // Retornar datos del usuario (incluyendo tenantId vital para la app)
+                return res.json({
+                    success: true,
+                    user: {
+                        id: user.id,
+                        email: user.email,
+                        name: user.name,
+                        role: user.role,
+                        tenantId: user.tenant_id,
+                        emailVerified: true,
+                        avatarUrl: user.avatar_url || image
+                    }
+                });
+            }
+
+            // 2. Si no existe, crear usuario nuevo
+            const newUser = await platform.createUser({
+                email,
+                name: name || 'Usuario Google',
+                password: 'managed_by_google_oauth', // No usable password
+                role: 'owner', // Default role for new signups
+                emailVerified: true,
+                provider: 'google',
+                providerId: providerId,
+                avatarUrl: image
+            });
+
+            console.log('✅ Nuevo usuario Google creado:', newUser.id);
+
+            res.json({
+                success: true,
+                user: {
+                    id: newUser.id,
+                    email: newUser.email,
+                    name: newUser.name,
+                    role: newUser.role,
+                    tenantId: newUser.tenant_id,
+                    emailVerified: true,
+                    avatarUrl: newUser.avatar_url
+                }
+            });
+
+        } catch (error) {
+            console.error('❌ Error en google-callback:', error);
+            res.status(500).json({ error: 'Error sincronizando usuario Google' });
         }
     });
 

@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
 
-const API_URL = 'http://localhost:3001/api';
+const API_URL = import.meta.env.VITE_API_URL;
+
+if (!API_URL) {
+    console.error('❌ VITE_API_URL no está definida. La app no funcionará correctamente.');
+}
 
 const RegisterV2 = () => {
     const [step, setStep] = useState(1); // 1: Email, 2: Verificar, 3: Completar
@@ -124,8 +128,8 @@ const RegisterV2 = () => {
                         {[1, 2, 3].map((s) => (
                             <React.Fragment key={s}>
                                 <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all ${step >= s
-                                        ? 'bg-white text-purple-900'
-                                        : 'bg-white/20 text-white/50'
+                                    ? 'bg-white text-purple-900'
+                                    : 'bg-white/20 text-white/50'
                                     }`}>
                                     {step > s ? '✓' : s}
                                 </div>

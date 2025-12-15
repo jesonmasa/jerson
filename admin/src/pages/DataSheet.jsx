@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useAuthStore } from '../store/authStore';
 
-const API_URL = 'http://localhost:3001/api';
+const API_URL = import.meta.env.VITE_API_URL;
+if (!API_URL) console.warn('Falta VITE_API_URL');
 
 /**
  * Celda editable para la tabla de productos

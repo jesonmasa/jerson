@@ -96,7 +96,8 @@ function MarketplaceContent() {
                 const enriched = (data as Product[]).map(p => {
                     let finalStoreUrl = p.storeUrl;
                     if (!isStoreMode && (p.storeUrl.startsWith('/') || !p.storeUrl.startsWith('http'))) {
-                        finalStoreUrl = `http://localhost:3002${p.storeUrl.startsWith('/') ? '' : '/'}${p.storeUrl}`;
+                        const baseUrl = process.env.NEXT_PUBLIC_STOREFRONT_URL || '';
+                        finalStoreUrl = `${baseUrl}${p.storeUrl.startsWith('/') ? '' : '/'}${p.storeUrl}`;
                     }
 
                     return {
@@ -112,7 +113,8 @@ function MarketplaceContent() {
                 const enrichedDeals = (dealsData as Product[]).map(p => {
                     let finalStoreUrl = p.storeUrl;
                     if (!isStoreMode && (p.storeUrl.startsWith('/') || !p.storeUrl.startsWith('http'))) {
-                        finalStoreUrl = `http://localhost:3002${p.storeUrl.startsWith('/') ? '' : '/'}${p.storeUrl}`;
+                        const baseUrl = process.env.NEXT_PUBLIC_STOREFRONT_URL || '';
+                        finalStoreUrl = `${baseUrl}${p.storeUrl.startsWith('/') ? '' : '/'}${p.storeUrl}`;
                     }
                     return { ...p, storeUrl: finalStoreUrl };
                 });
@@ -283,10 +285,10 @@ function MarketplaceContent() {
                                 {wishlist.size > 0 && <span className="absolute -top-1 right-2 w-4 h-4 bg-red-600 text-white rounded-full flex items-center justify-center text-[9px] font-bold">{wishlist.size}</span>}
                             </button>
 
-                            <Link href="/login" className="flex flex-col items-center hover:text-red-600">
+                            <div className="flex flex-col items-center hover:text-red-600 cursor-pointer">
                                 <svg className="w-6 h-6 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
                                 <span>Mi Cuenta</span>
-                            </Link>
+                            </div>
 
                             {/* Botón de Carrito (Simulado) */}
                             <button className="flex flex-col items-center hover:text-red-600">

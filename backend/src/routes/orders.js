@@ -1,50 +1,15 @@
 import express from 'express';
-import fs from 'fs/promises';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { tenant } from '../database/db.js';
 import { validateOrder, sanitizeText, isValidId } from '../security/validation.js';
 
-import { encrypt, decrypt } from '../security/encryption.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 const router = express.Router();
-const DATA_FILE = path.join(__dirname, '../../data/orders.json');
-
-// Asegurar archivo
-async function ensureDataFile() {
-    try {
-        await fs.access(DATA_FILE);
-    } catch {
-        await fs.mkdir(path.dirname(DATA_FILE), { recursive: true });
-        // Initialize with encrypted empty array
-        const empty = await encrypt([]);
-        await fs.writeFile(DATA_FILE, empty);
-    }
-}
-
-const readOrders = async () => {
-    try {
-        await ensureDataFile();
-        const content = await fs.readFile(DATA_FILE, 'utf-8');
-        const data = await decrypt(content);
-        return typeof data === 'string' ? JSON.parse(data) : data;
-    } catch (error) {
-        console.error('Error reading orders:', error);
-        return [];
-    }
-};
-
-const writeOrders = async (orders) => {
-    const encrypted = await encrypt(orders);
-    await fs.writeFile(DATA_FILE, encrypted);
-};
+const DEFAULT_TENANT = 'default';
 
 // Get all orders
 router.get('/', async (req, res) => {
     try {
-        const orders = await readOrders();
+        const orders = await tenant.findAll(DEFAULT_TENANT, 'orders');
+        // Sort by created_at desc
         orders.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
         res.json(orders);
     } catch (error) {
@@ -60,8 +25,7 @@ router.get('/:id', async (req, res) => {
             return res.status(400).json({ error: 'ID inválido' });
         }
 
-        const orders = await readOrders();
-        const order = orders.find(o => o.id === req.params.id);
+        const order = await tenant.findById(DEFAULT_TENANT, 'orders', req.params.id);
         if (!order) {
             return res.status(404).json({ error: 'Orden no encontrada' });
         }
@@ -80,11 +44,7 @@ router.post('/', async (req, res) => {
             return res.status(400).json({ error: validation.errors.join(', ') });
         }
 
-        const orders = await readOrders();
-
-        // Generar ID seguro
-        const lastId = orders.length > 0 ? parseInt(orders[0].id.replace('#', '')) : 1000;
-        const newId = `#${lastId + 1}`;
+        const newId = `#ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
 
         // Calcular total validado
         const total = validation.data.items.reduce(
@@ -101,17 +61,16 @@ router.post('/', async (req, res) => {
             items_details: validation.data.items,
             total: Math.round(total * 100) / 100,
             status: 'pending',
-            payment: 'WhatsApp',
+            payment: 'WhatsApp', // Default manual payment
             shipping: 'Standard',
             created_at: new Date().toISOString(),
             age: sanitizeText(String(req.body.age || '')),
             gender: sanitizeText(String(req.body.gender || ''))
         };
 
-        orders.unshift(newOrder);
-        await writeOrders(orders);
+        await tenant.insert(DEFAULT_TENANT, 'orders', newOrder);
 
-        console.log(`🛒 Nueva orden: ${newId}`);
+        console.log(`🛒 Nueva orden (DB): ${newId}`);
         res.status(201).json(newOrder);
     } catch (error) {
         console.error('Error:', error.message);
@@ -133,18 +92,17 @@ router.patch('/:id/status', async (req, res) => {
             return res.status(400).json({ error: 'Estado inválido' });
         }
 
-        const orders = await readOrders();
-        const index = orders.findIndex(o => o.id === req.params.id);
-
-        if (index === -1) {
+        const order = await tenant.findById(DEFAULT_TENANT, 'orders', req.params.id);
+        if (!order) {
             return res.status(404).json({ error: 'Orden no encontrada' });
         }
 
-        orders[index].status = status;
-        orders[index].updated_at = new Date().toISOString();
-        await writeOrders(orders);
+        const updated = await tenant.update(DEFAULT_TENANT, 'orders', req.params.id, {
+            status,
+            updated_at: new Date().toISOString()
+        });
 
-        res.json(orders[index]);
+        res.json(updated);
     } catch (error) {
         res.status(500).json({ error: 'Error interno' });
     }

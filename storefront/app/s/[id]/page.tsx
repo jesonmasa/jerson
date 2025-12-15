@@ -23,7 +23,8 @@ export default function StorePage({ params }: { params: { id: string } }) {
     useEffect(() => {
         const fetchStoreProducts = async () => {
             try {
-                const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+                const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+                if (!apiUrl) throw new Error('Falta configuración de API');
                 // Usamos la ruta específica para obtener productos de una tienda
                 const res = await fetch(`${apiUrl}/products/store/${params.id}`);
 

@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useAuthStore } from '../store/authStore';
 
 const Products = () => {
+    const API_URL = import.meta.env.VITE_API_URL;
+
+    if (!API_URL) console.warn('Falta VITE_API_URL');
     // Obtener token del store global de Zustand (persistido)
     const { token } = useAuthStore();
     const [products, setProducts] = useState([]);
@@ -38,8 +41,8 @@ const Products = () => {
                 console.error('No token found in store');
                 return;
             }
-            const response = await fetch('http://localhost:3001/api/v2/products', {
-                headers: { 'Authorization': `Bearer ${token}` }
+            const response = await fetch(`${API_URL}/products`, {
+                headers: { 'Authorization': `Bearer ${token} ` }
             });
             if (response.ok) {
                 const data = await response.json();
@@ -55,8 +58,8 @@ const Products = () => {
     const loadCategories = async () => {
         try {
             if (!token) return;
-            const response = await fetch('http://localhost:3001/api/v2/categories', {
-                headers: { 'Authorization': `Bearer ${token}` }
+            const response = await fetch(`${API_URL}/categories`, {
+                headers: { 'Authorization': `Bearer ${token} ` }
             });
             if (response.ok) {
                 const data = await response.json();
@@ -82,11 +85,16 @@ const Products = () => {
             const reader = new FileReader();
             reader.onloadend = async () => {
                 const base64Data = reader.result;
-                const response = await fetch('http://localhost:3001/api/upload', {
+                // Upload usa ruta base distinta (/api/upload vs /api/v2/...)
+                // Ajustamos para quitar el /v2 si es necesario o unificamos. 
+                // ASUMIENDO BASE: VITE_API_URL = .../api/v2. Upload suele estar en .../api/upload
+                // TRUCO: Reemplazar '/v2' por '' si existe para ir a la raiz de api
+                const baseUrl = API_URL.replace('/v2', '');
+                const response = await fetch(`${baseUrl}/upload`, {
                     method: 'POST',
-                    headers: { 
+                    headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${token} `
                     },
                     body: JSON.stringify({
                         image: base64Data,
@@ -165,7 +173,7 @@ const Products = () => {
     const handleDelete = async (id) => {
         if (!confirm('¿Estás seguro de eliminar este producto?')) return;
         try {
-            const response = await fetch(`http://localhost:3001/api/v2/products/${id}`, {
+            const response = await fetch(`${API_URL}/products/${id}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -197,7 +205,7 @@ const Products = () => {
             let response;
             if (newStatus === 'published') {
                 // Usar bulk-publish para publicar (más robusto)
-                response = await fetch(`http://localhost:3001/api/v2/products/bulk-publish`, {
+                response = await fetch(`${API_URL}/v2/products/bulk-publish`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -207,7 +215,7 @@ const Products = () => {
                 });
             } else {
                 // Usar draft endpoint para despublicar
-                response = await fetch(`http://localhost:3001/api/v2/products/${product.id}/draft`, {
+                response = await fetch(`${API_URL}/v2/products/${product.id}/draft`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json',
@@ -241,7 +249,7 @@ const Products = () => {
         setPublishingAll(true);
         try {
             const ids = draftProducts.map(p => p.id);
-            const response = await fetch('http://localhost:3001/api/v2/products/bulk-publish', {
+            const response = await fetch(`${API_URL}/products/bulk-publish`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -269,8 +277,8 @@ const Products = () => {
 
         try {
             const url = editingProduct
-                ? `http://localhost:3001/api/v2/products/${editingProduct.id}`
-                : 'http://localhost:3001/api/v2/products';
+                ? `${API_URL}/products/${editingProduct.id}`
+                : `${API_URL}/products`;
 
             const method = editingProduct ? 'PUT' : 'POST';
 
@@ -480,7 +488,7 @@ const Products = () => {
                                 {formData.image && (
                                     <div className="mt-2 relative inline-block">
                                         <img src={formData.image} className="h-20 rounded border" alt="preview" />
-                                        <button 
+                                        <button
                                             type="button"
                                             onClick={() => setFormData({ ...formData, image: '' })}
                                             className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600"

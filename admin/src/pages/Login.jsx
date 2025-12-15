@@ -4,16 +4,13 @@ import { useAuthStore } from '../store/authStore';
 
 // Detectar entorno para URL base
 const getApiUrl = () => {
-    // Si hay variable de entorno (Vite)
-    const envUrl = import.meta.env.VITE_API_URL;
-    if (envUrl) return envUrl;
-
-    // Si estamos en Vercel (mismo dominio), usar relativo
+    // Si estamos en producción (no localhost), usar variable de entorno o relativo
     if (window.location.hostname !== 'localhost') {
-        return '/api';
+        const prodUrl = import.meta.env.VITE_API_URL;
+        if (prodUrl) return prodUrl;
+        return 'https://jerson-backend.vercel.app/api'; // Fallback a producción real si no hay env
     }
-
-    // Fallback local
+    // En desarrollo/local
     return 'http://localhost:3001/api';
 };
 
@@ -34,6 +31,29 @@ const Login = () => {
         setLoading(true);
 
         try {
+            // Credenciales del super admin (hardcodeadas con fallback a env vars)
+            const ADMIN_USER = import.meta.env.VITE_ADMIN_USER || 'adminuramarket';
+            const ADMIN_PASS = import.meta.env.VITE_ADMIN_PASS || 'uraMarket2026*';
+
+            // Validar credenciales contra las configuradas
+            if (email === ADMIN_USER && password === ADMIN_PASS) {
+                // Login exitoso como super admin
+                const superAdminUser = {
+                    id: 'super-admin-001',
+                    email: ADMIN_USER,
+                    name: 'Super Admin',
+                    role: 'super_admin'
+                };
+
+                // Crear token simple (solo para el admin local)
+                const token = btoa(JSON.stringify({ email: ADMIN_USER, role: 'super_admin', timestamp: Date.now() }));
+
+                setAuth(token, superAdminUser);
+                navigate('/');
+                return;
+            }
+
+            // Si no coincide con super admin, intentar login normal via API
             const res = await fetch(`${API_URL}/auth/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -48,15 +68,15 @@ const Login = () => {
                     setError(data.message);
                     return;
                 }
-                throw new Error(data.error || 'Error al iniciar sesión');
+                throw new Error(data.error || 'Credenciales incorrectas');
             }
 
-            // Login exitoso
+            // Login exitoso via API
             setAuth(data.token, data.user);
             navigate('/');
 
         } catch (err) {
-            setError(err.message);
+            setError(err.message || 'Error al iniciar sesión');
         } finally {
             setLoading(false);
         }

@@ -1,7 +1,9 @@
 import axios from 'axios'
 
-// Use relative path so Next.js rewrites can handle the proxying to backend
-const API_URL = '';
+// La URL base es relativa porque usamos rewrites en next.config.js
+// Esto redirige /api -> NEXT_PUBLIC_API_URL/api
+// La URL base depende del entorno (Vercel Preview, Prod o Local)
+const API_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
 console.log('🔌 API_URL initialized: Relative /api (Proxied via next.config.js)');
 

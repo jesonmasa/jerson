@@ -43,9 +43,7 @@ function generateSignature(params) {
         .update(stringToSign + CLOUDINARY_CONFIG.api_secret)
         .digest('hex');
 
-    console.log('✍️ Manual Signature:', manualSignature); // Log para depuración
-
-    return manualSignature; // Retornar la firma calculada manualmente
+    return manualSignature;
 }
 
 /**

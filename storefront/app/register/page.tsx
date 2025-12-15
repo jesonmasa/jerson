@@ -3,12 +3,18 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react';
 
 export default function RegisterPage() {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
+
+    // Estados para verificación por código
+    const [step, setStep] = useState<'register' | 'verify'>('register');
+    const [verificationCode, setVerificationCode] = useState('');
+    const [verifyEmail, setVerifyEmail] = useState('');
 
     // Form Data
     const [name, setName] = useState('');
@@ -46,6 +52,14 @@ export default function RegisterPage() {
                 throw new Error(data.error || 'Error al registrar');
             }
 
+            // Si el backend requiere código de verificación (porque usamos SMTP propio)
+            if (data.requireCode) {
+                setVerifyEmail(data.email || email);
+                setStep('verify');
+                setLoading(false);
+                return;
+            }
+
             // Si hay sesión activa (email ya confirmado o auto-confirmado), redirigir
             if (data.session?.accessToken) {
                 localStorage.setItem('token', data.session.accessToken);
@@ -58,9 +72,47 @@ export default function RegisterPage() {
                     router.push('/');
                 }
             } else {
-                // Mostrar mensaje de éxito para verificar por link
+                // Mostrar mensaje de éxito para verificar por link (legacy)
                 setSuccess(true);
             }
+
+        } catch (err: any) {
+            setError(err.message);
+        } finally {
+            if (step !== 'verify') {
+                setLoading(false);
+            }
+        }
+    };
+
+    const handleVerifyCode = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        setError('');
+
+        try {
+            let apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+            if (apiUrl) {
+                apiUrl = apiUrl.replace(/\/+$/, '');
+                if (!apiUrl.endsWith('/api')) apiUrl = `${apiUrl}/api`;
+            } else {
+                apiUrl = '/api';
+            }
+
+            const res = await fetch(`${apiUrl}/auth/verify-code`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: verifyEmail, code: verificationCode })
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                throw new Error(data.error || 'Código incorrecto');
+            }
+
+            // Éxito
+            router.push('/login?verified=true');
 
         } catch (err: any) {
             setError(err.message);
@@ -69,7 +121,7 @@ export default function RegisterPage() {
         }
     };
 
-    // Pantalla de éxito (verificar email)
+    // Pantalla de éxito (verificar email por LINK) - Solo si requireCode es false
     if (success) {
         return (
             <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 font-sans">
@@ -91,17 +143,71 @@ export default function RegisterPage() {
                             Hemos enviado un enlace de confirmación a:
                         </p>
                         <p className="font-semibold text-gray-900 mb-6">{email}</p>
-                        <p className="text-sm text-gray-500 mb-4">
-                            Por favor, revisa tu correo y haz clic en el enlace para activar tu cuenta.
-                        </p>
-                        <p className="text-xs text-gray-400">
-                            Puede tardar unos minutos. Revisa también tu carpeta de spam.
-                        </p>
                         <div className="mt-6">
                             <Link href="/login" className="text-red-600 hover:text-red-500 font-medium">
                                 Ir a Iniciar Sesión
                             </Link>
                         </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    // Pantalla de Verificación de CÓDIGO
+    if (step === 'verify') {
+        return (
+            <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 font-sans">
+                <div className="sm:mx-auto sm:w-full sm:max-w-md">
+                    <Link href="/" className="flex justify-center text-4xl font-black tracking-tighter text-red-600 mb-6">
+                        Ura<span className="text-gray-800 text-lg font-normal ml-1 mt-auto mb-1">Market</span>
+                    </Link>
+                    <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                        Verifica tu correo
+                    </h2>
+                    <p className="mt-2 text-center text-sm text-gray-600">
+                        Ingresa el código que enviamos a {verifyEmail}
+                    </p>
+                </div>
+
+                <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+                    <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                        {error && (
+                            <div className="bg-red-50 border-l-4 border-red-400 p-4 mb-6">
+                                <p className="text-sm text-red-700">{error}</p>
+                            </div>
+                        )}
+
+                        <form className="space-y-6" onSubmit={handleVerifyCode}>
+                            <div>
+                                <label htmlFor="code" className="block text-sm font-medium text-gray-700">
+                                    Código de Verificación
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        id="code"
+                                        name="code"
+                                        type="text"
+                                        required
+                                        value={verificationCode}
+                                        onChange={(e) => setVerificationCode(e.target.value)}
+                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm text-center tracking-widest text-2xl"
+                                        placeholder="000000"
+                                        maxLength={6}
+                                    />
+                                </div>
+                            </div>
+
+                            <div>
+                                <button
+                                    type="submit"
+                                    disabled={loading}
+                                    className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${loading ? 'bg-red-400' : 'bg-red-600 hover:bg-red-700'} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors`}
+                                >
+                                    {loading ? 'Verificando...' : 'Verificar Cuenta'}
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -206,6 +312,30 @@ export default function RegisterPage() {
                             </button>
                         </div>
                     </form>
+
+                    <div className="mt-6">
+                        <div className="relative">
+                            <div className="absolute inset-0 flex items-center">
+                                <div className="w-full border-t border-gray-300" />
+                            </div>
+                            <div className="relative flex justify-center text-sm">
+                                <span className="px-2 bg-white text-gray-500">
+                                    O regístrate con
+                                </span>
+                            </div>
+                        </div>
+
+                        <div className="mt-6">
+                            <button
+                                type="button"
+                                onClick={() => signIn('google', { callbackUrl: '/' })}
+                                className="w-full inline-flex justify-center items-center py-3 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+                            >
+                                <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .533 5.333.533 12S5.867 24 12.48 24c3.44 0 6.32-1.133 8.2-3.293 1.92-1.96 2.44-4.813 2.44-7.16 0-.587-.067-1.027-.147-1.627h-10.5z" /></svg>
+                                Continuar con Google
+                            </button>
+                        </div>
+                    </div>
 
                     <div className="mt-6">
                         <p className="text-xs text-center text-gray-500">

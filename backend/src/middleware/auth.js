@@ -24,32 +24,21 @@ export const authenticate = async (req, res, next) => {
         const authHeader = req.headers['authorization'];
         const token = authHeader && authHeader.split(' ')[1];
 
-        // DEBUG LOGS (FORZADO)
-        console.log('--- AUTH DEBUG START ---');
-        console.log('Incoming Path:', req.path);
-        console.log('Header:', authHeader);
-        console.log('Token (first 10):', token ? token.substring(0, 10) + '...' : 'NONE');
-        console.log('Secret (first 5):', JWT_SECRET.substring(0, 5) + '...');
-
         if (!token) {
-            console.error('❌ Auth failed: No token provided');
-            return res.status(401).json({ error: 'Token de acceso requerido', debug: 'missing_token' });
+            // console.error('❌ Auth failed: No token provided');
+            return res.status(401).json({ error: 'Token de acceso requerido' });
         }
 
         try {
             const decoded = jwt.verify(token, JWT_SECRET);
-            console.log('✅ Token Decode Success:', decoded);
 
             const user = await platform.findUserById(decoded.userId);
             if (!user) {
-                console.error('❌ Auth failed: User not found in DB for ID:', decoded.userId);
-                return res.status(401).json({ error: 'Usuario no encontrado', debug: 'user_not_found' });
+                return res.status(401).json({ error: 'Usuario no encontrado' });
             }
 
             req.user = user;
             req.tenantId = user.tenantId;
-            console.log('✅ Auth Full Success. User:', user.email, 'Tenant:', user.tenantId);
-            console.log('--- AUTH DEBUG END ---');
             next();
         } catch (jwtError) {
             console.error('❌ JWT Verify Error:', jwtError.message);

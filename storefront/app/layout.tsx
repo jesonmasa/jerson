@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Outfit } from 'next/font/google'
 import './globals.css'
+import NextAuthProvider from './providers'
 
 const inter = Inter({
     subsets: ['latin'],
@@ -53,7 +54,9 @@ export default function RootLayout({
                 <meta name="mobile-web-app-capable" content="yes" />
             </head>
             <body className="font-sans">
-                {children}
+                <NextAuthProvider>
+                    {children}
+                </NextAuthProvider>
             </body>
         </html>
     )

@@ -301,36 +301,7 @@ router.post('/create-admin', async (req, res) => {
 // ============================================
 // GENERAR TOKEN PARA ACCEDER AL PANEL DE USUARIO (Super Admin)
 // ============================================
-router.post('/generate-user-token/:userId', async (req, res) => {
-    try {
-        const { userId } = req.params;
-
-        // Verificar que el usuario existe
-        const user = await platform.findUserById(userId);
-        if (!user) {
-            return res.status(404).json({ error: 'Usuario no encontrado' });
-        }
-
-        // Importar y usar la función generateToken
-        const authModule = await import('../middleware/auth.js');
-        const token = authModule.generateToken(user);
-
-        res.json({
-            success: true,
-            token,
-            user: {
-                id: user.id,
-                email: user.email,
-                name: user.name,
-                tenantId: user.tenantId,
-                role: user.role
-            }
-        });
-
-    } catch (error) {
-        console.error('Generate user token error:', error);
-        res.status(500).json({ error: 'Error al generar token de usuario' });
-    }
-});
+// Ruta de generación de token eliminada por motivos de seguridad.
+// Si se requiere impersonation, implementar un mecanismo de log de auditoría estricto.
 
 export default router;

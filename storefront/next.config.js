@@ -82,7 +82,7 @@ const withPWA = require('next-pwa')({
             }
         },
         {
-            urlPattern: /^https:\/\/localhost:3001\/api\/.*/i,
+            urlPattern: /^https?:\/\/(?:localhost|.*\.vercel\.app)\/api\/.*/i,
             handler: 'NetworkFirst',
             options: {
                 cacheName: 'api-cache',
@@ -126,7 +126,28 @@ const nextConfig = {
     },
     reactStrictMode: true,
     swcMinify: true,
-    // rewrites removed to use same-domain API
+    // Rewrites para evitar CORS y soportar backend separado en Vercel
+    async rewrites() {
+        // En Vercel, esta variable se configura en el panel. Localmente usa .env
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+        if (!apiUrl) {
+            console.warn('⚠️ ADVERTENCIA: NEXT_PUBLIC_API_URL no está definida. Las llamadas a /api fallarán.');
+        } else {
+            console.log('⚡ Configurando Next.js Rewrites hacia:', apiUrl);
+        }
+
+        return [
+            {
+                source: '/api/:path*',
+                destination: `${apiUrl || 'http://localhost:3001'}/api/:path*`, // Fallback temporal para no romper build
+            },
+            {
+                source: '/uploads/:path*',
+                destination: `${apiUrl || 'http://localhost:3001'}/uploads/:path*`,
+            }
+        ];
+    }
 }
 
 module.exports = withPWA(nextConfig)

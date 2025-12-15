@@ -2,7 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useAuthStore } from '../store/authStore';
 import { themeConfigs } from '../../../storefront/lib/themeConfigs';
 
-const API_URL = 'http://localhost:3001/api/v2';
+const API_URL = import.meta.env.VITE_API_URL;
+const STOREFRONT_URL = import.meta.env.VITE_STOREFRONT_URL;
+
+if (!API_URL || !STOREFRONT_URL) {
+    console.warn('⚠️ Faltan variables de entorno (VITE_API_URL o VITE_STOREFRONT_URL).');
+}
 
 // Lista de plantillas disponibles (20 temas)
 const AVAILABLE_THEMES = [
@@ -114,7 +119,8 @@ const GlobalConfig = () => {
 
                 // Open live store
                 if (user?.tenantId) {
-                    window.open(`http://localhost:3002/store/${user.tenantId}`, '_blank');
+                    const storefrontUrl = import.meta.env.VITE_STOREFRONT_URL;
+                    window.open(`${storefrontUrl}/store/${user.tenantId}`, '_blank');
                 }
             }
         } catch (err) {
@@ -224,7 +230,7 @@ const GlobalConfig = () => {
                                 }}
                                 className="w-full px-3 py-2 border border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-primary-500 transition"
                             />
-                            
+
                             {/* Botón de Optimizar */}
                             {config._tempBannerFile && (
                                 <button
@@ -241,9 +247,10 @@ const GlobalConfig = () => {
                                             const base64 = reader.result;
 
                                             try {
-                                                const res = await fetch('http://localhost:3001/api/upload', {
+                                                // Usar la URL de la API definida en la constante superior o fallback seguro a vacío (fallará si no hay env, que es lo esperado)
+                                                const res = await fetch(`${API_URL}/upload`, {
                                                     method: 'POST',
-                                                    headers: { 
+                                                    headers: {
                                                         'Content-Type': 'application/json',
                                                         'Authorization': `Bearer ${token}`
                                                     },
@@ -265,8 +272,8 @@ const GlobalConfig = () => {
                                                     const imageUrl = data.data.url;
 
                                                     // Update state
-                                                    const updatedConfig = { 
-                                                        ...config, 
+                                                    const updatedConfig = {
+                                                        ...config,
                                                         bannerImage: imageUrl,
                                                         _tempBannerFile: null // Limpiar archivo temporal
                                                     };
@@ -275,7 +282,7 @@ const GlobalConfig = () => {
                                                     // Auto-save to backend
                                                     await fetch(`${API_URL}/config`, {
                                                         method: 'PUT',
-                                                        headers: { 
+                                                        headers: {
                                                             'Content-Type': 'application/json',
                                                             'Authorization': `Bearer ${token}`
                                                         },
@@ -283,7 +290,7 @@ const GlobalConfig = () => {
                                                     });
 
                                                     setMessage('✅ Imagen optimizada y guardada correctamente');
-                                                    
+
                                                     // Limpiar input
                                                     document.getElementById('banner-upload-input').value = '';
                                                 } else {
@@ -454,7 +461,7 @@ const GlobalConfig = () => {
                                         <div className="flex gap-2">
                                             <button
                                                 type="button"
-                                                onClick={() => window.open(`http://localhost:3002?preview=${theme.id}`, '_blank')}
+                                                onClick={() => window.open(`${STOREFRONT_URL}?preview=${theme.id}`, '_blank')}
                                                 className="flex-1 py-2 px-3 text-sm font-medium border border-gray-300 rounded-lg hover:bg-gray-50 transition flex items-center justify-center gap-1"
                                             >
                                                 👁️ Vista Previa

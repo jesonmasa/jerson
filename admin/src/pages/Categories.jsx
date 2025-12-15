@@ -12,7 +12,8 @@ const Categories = () => {
     const loadCategories = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch('http://localhost:3001/api/v2/categories', {
+            const API_URL = import.meta.env.VITE_API_URL;
+            const response = await fetch(`${API_URL}/v2/categories`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const data = await response.json();
@@ -31,7 +32,8 @@ const Categories = () => {
 
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch('http://localhost:3001/api/v2/categories', {
+            const API_URL = import.meta.env.VITE_API_URL; // Asegurar alcance
+            const response = await fetch(`${API_URL}/categories`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -56,7 +58,8 @@ const Categories = () => {
 
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`http://localhost:3001/api/v2/categories/${id}`, {
+            const API_URL = import.meta.env.VITE_API_URL;
+            const response = await fetch(`${API_URL}/v2/categories/${id}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             });

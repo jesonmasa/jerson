@@ -21,9 +21,7 @@ export default function CheckoutPage() {
         city: '',
         postalCode: '',
         country: '',
-        cardNumber: '',
-        cardExpiry: '',
-        cardCvc: '',
+        // Removed sensitive card fields
     })
 
     useEffect(() => {
@@ -207,63 +205,29 @@ export default function CheckoutPage() {
                                 </div>
                             </div>
 
-                            {/* Payment */}
+                            {/* Payment Method - PCI Compliance Fix */}
                             <div className="card">
                                 <h2 className="text-2xl font-display font-bold mb-6 flex items-center gap-2">
                                     <CreditCard className="w-6 h-6" />
-                                    Payment Information
+                                    Método de Pago
                                 </h2>
                                 <div className="space-y-4">
-                                    <div>
-                                        <label className="block text-sm font-medium mb-2">
-                                            Card Number
+                                    <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r">
+                                        <div className="flex items-center gap-2 text-blue-700 font-bold mb-2">
+                                            <Lock className="w-4 h-4" />
+                                            Pago Seguro y Coordinado
+                                        </div>
+                                        <p className="text-secondary-700 text-sm">
+                                            Para garantizar tu seguridad, completaremos el pago una vez confirmado el pedido.
+                                            Un asesor se pondrá en contacto contigo para coordinar el método que prefieras (Transferencia, Yape/Plin, o Contraentrega).
+                                        </p>
+                                    </div>
+
+                                    <div className="flex flex-col gap-3">
+                                        <label className="flex items-center gap-3 p-3 border border-secondary-200 rounded-lg cursor-pointer hover:bg-secondary-50 transition-colors">
+                                            <input type="radio" name="paymentMethod" defaultChecked className="w-4 h-4 text-primary-600" />
+                                            <span className="font-medium">Coordinar Pago (WhatsApp / Contraentrega)</span>
                                         </label>
-                                        <input
-                                            type="text"
-                                            name="cardNumber"
-                                            value={formData.cardNumber}
-                                            onChange={handleChange}
-                                            required
-                                            className="input"
-                                            placeholder="1234 5678 9012 3456"
-                                            maxLength={19}
-                                        />
-                                    </div>
-                                    <div className="grid md:grid-cols-2 gap-4">
-                                        <div>
-                                            <label className="block text-sm font-medium mb-2">
-                                                Expiry Date
-                                            </label>
-                                            <input
-                                                type="text"
-                                                name="cardExpiry"
-                                                value={formData.cardExpiry}
-                                                onChange={handleChange}
-                                                required
-                                                className="input"
-                                                placeholder="MM/YY"
-                                                maxLength={5}
-                                            />
-                                        </div>
-                                        <div>
-                                            <label className="block text-sm font-medium mb-2">
-                                                CVC
-                                            </label>
-                                            <input
-                                                type="text"
-                                                name="cardCvc"
-                                                value={formData.cardCvc}
-                                                onChange={handleChange}
-                                                required
-                                                className="input"
-                                                placeholder="123"
-                                                maxLength={3}
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-2 text-sm text-secondary-600 bg-secondary-50 p-3 rounded-lg">
-                                        <Lock className="w-4 h-4" />
-                                        Your payment information is secure and encrypted
                                     </div>
                                 </div>
                             </div>

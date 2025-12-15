@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useAuthStore } from '../../store/authStore';
 
-const API_URL = 'http://localhost:3001/api';
+const API_URL = import.meta.env.VITE_API_URL;
+if (!API_URL) console.error('FATAL: VITE_API_URL no definida en Dashboard');
 
 const SuperAdminDashboard = () => {
     const location = useLocation();
@@ -52,11 +53,11 @@ const SuperAdminDashboard = () => {
             const usersRes = await fetch(`${API_URL}/super-admin/users`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
-            
+
             if (!usersRes.ok) {
                 throw new Error('Error al cargar usuarios');
             }
-            
+
             const usersData = await usersRes.json();
             setUsers(Array.isArray(usersData.users) ? usersData.users : []);
         } catch (err) {
@@ -83,7 +84,7 @@ const SuperAdminDashboard = () => {
             alert('Este usuario no tiene un panel administrativo configurado');
             return;
         }
-        
+
         try {
             // Solicitar al backend un token para acceder al panel del usuario
             const response = await fetch(`${API_URL}/super-admin/generate-user-token/${user.id}`, {
@@ -117,9 +118,10 @@ const SuperAdminDashboard = () => {
             alert('Este usuario no tiene una tienda configurada');
             return;
         }
-        
+
         // Abrir la tienda pública del usuario en una nueva pestaña
-        const storeUrl = `http://localhost:3000/store/${user.tenantId}`;
+        const storefrontUrl = import.meta.env.VITE_STOREFRONT_URL;
+        const storeUrl = `${storefrontUrl}/store/${user.tenantId}`;
         window.open(storeUrl, '_blank');
     };
 
@@ -194,8 +196,8 @@ const SuperAdminDashboard = () => {
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id)}
                             className={`px-4 py-2 rounded-lg text-sm font-medium transition ${activeTab === tab.id
-                                    ? 'bg-white text-gray-900'
-                                    : 'text-gray-400 hover:text-white hover:bg-white/10'
+                                ? 'bg-white text-gray-900'
+                                : 'text-gray-400 hover:text-white hover:bg-white/10'
                                 }`}
                         >
                             {tab.label}
@@ -355,8 +357,8 @@ const SuperAdminDashboard = () => {
                                             </td>
                                             <td className="px-6 py-4">
                                                 <span className={`px-3 py-1 rounded-full text-xs font-medium ${user.subscription?.status === 'active'
-                                                        ? 'bg-green-500/20 text-green-400'
-                                                        : 'bg-gray-500/20 text-gray-400'
+                                                    ? 'bg-green-500/20 text-green-400'
+                                                    : 'bg-gray-500/20 text-gray-400'
                                                     }`}>
                                                     {user.subscription?.planName || 'Sin plan'}
                                                 </span>

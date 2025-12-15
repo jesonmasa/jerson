@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
 
-const API_URL = 'http://localhost:3001/api';
+const API_URL = import.meta.env.VITE_API_URL;
+if (!API_URL) console.warn('Falta VITE_API_URL');
 
 const Billing = () => {
     const [plans, setPlans] = useState([]);
@@ -139,8 +140,8 @@ const Billing = () => {
                 {/* Mensajes */}
                 {message.text && (
                     <div className={`max-w-2xl mx-auto mb-8 p-4 rounded-xl ${message.type === 'success'
-                            ? 'bg-green-50 border border-green-200 text-green-700'
-                            : 'bg-red-50 border border-red-200 text-red-700'
+                        ? 'bg-green-50 border border-green-200 text-green-700'
+                        : 'bg-red-50 border border-red-200 text-red-700'
                         }`}>
                         {message.text}
                     </div>
@@ -159,8 +160,8 @@ const Billing = () => {
                             </div>
                             <div className="text-right">
                                 <span className={`px-3 py-1 rounded-full text-sm font-medium ${currentSubscription.status === 'active'
-                                        ? 'bg-green-500'
-                                        : 'bg-yellow-500'
+                                    ? 'bg-green-500'
+                                    : 'bg-yellow-500'
                                     }`}>
                                     {currentSubscription.status === 'active' ? 'Activo' : 'Cancelado'}
                                 </span>
@@ -223,8 +224,8 @@ const Billing = () => {
                                         <button
                                             onClick={() => handleSelectPlan(plan)}
                                             className={`w-full py-4 font-bold rounded-xl transition-all duration-300 ${isPro
-                                                    ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700'
-                                                    : 'bg-gray-900 text-white hover:bg-gray-800'
+                                                ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700'
+                                                : 'bg-gray-900 text-white hover:bg-gray-800'
                                                 }`}
                                         >
                                             {currentSubscription ? 'Cambiar a Este Plan' : 'Comenzar Ahora'}
